@@ -36,7 +36,7 @@
       update_time)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, 
-      #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{description, jdbc=VARCHAR}, now(),
+      #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{description, jdbcType=VARCHAR}, now(),
       now())
   </insert>
   <insert id="insertSelective" parameterType="com.metyou.pojo.User">
@@ -136,8 +136,8 @@
       <if test="role != null">
         role = #{role,jdbcType=INTEGER},
       </if>
-      <if test="decription != null">
-        decription = #{decription,jdbcType=VARCHAR},
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = now(),
