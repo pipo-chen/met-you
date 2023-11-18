@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--spring 容器的主配置-->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
@@ -13,8 +14,7 @@
 
     <!--<context:annotation-config/>-->
     <aop:aspectj-autoproxy/>
-
-
+<!--    当前文件进行分离-->
     <import resource="applicationContext-datasource.xml"/>
 
 
