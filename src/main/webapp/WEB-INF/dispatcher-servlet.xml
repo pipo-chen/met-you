@@ -25,7 +25,7 @@
                     </list>
                 </property>
             </bean>
-<!--            spingmvc 自动反序列化的配置类 -->
+<!--         spingmvc 自动反序列化的配置类 -->
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name = "supportedMediaTypes">
                     <list>

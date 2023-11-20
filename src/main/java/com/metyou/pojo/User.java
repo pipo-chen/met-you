@@ -1,5 +1,7 @@
 package com.metyou.pojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.Date;
 
 public class User {
@@ -25,6 +27,11 @@ public class User {
 
     private Date updateTime;
 
+
+    public User() {
+        super();
+    }
+
     public User(Integer id, String username, String password, String email, String phone, String question, String answer, Integer role, String description, Date createTime, Date updateTime) {
         this.id = id;
         this.username = username;
@@ -34,13 +41,9 @@ public class User {
         this.question = question;
         this.answer = answer;
         this.role = role;
+        this.description = description;
         this.createTime = createTime;
         this.updateTime = updateTime;
-        this.description = description;
-    }
-
-    public User() {
-        super();
     }
 
     public Integer getId() {
