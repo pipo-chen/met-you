@@ -10,17 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db12167e-df53-424c-a021-a8c453451319" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/portal/CartController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/ICartService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/CartServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/util/BigDecimalUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/vo/CartProductVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/vo/CartVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/test/java/com/metyou/test/BigDecimalTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/portal/ShippingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/IShippingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/ShippingServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/common/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/common/Const.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/dao/CartMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/dao/CartMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/CartMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/CartMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/dao/ShippingMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/dao/ShippingMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/ShippingMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/ShippingMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +250,7 @@
       <option name="presentableId" value="Default" />
       <updated>1700306688185</updated>
       <workItem from="1700306689205" duration="9723000" />
-      <workItem from="1700317144524" duration="69871000" />
+      <workItem from="1700317144524" duration="72513000" />
     </task>
     <servers />
   </component>
