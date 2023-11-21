@@ -10,24 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db12167e-df53-424c-a021-a8c453451319" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/ProductManagerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/portal/ProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/IFileService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/IProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/FileServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/ProductServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/util/DateTimeUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/util/FTPUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/vo/ProductDetailVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/vo/ProductListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/portal/CartController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/ICartService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/CartServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/util/BigDecimalUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/vo/CartProductVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/vo/CartVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/test/java/com/metyou/test/BigDecimalTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/common/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/common/Const.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/dao/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/dao/ProductMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/ICategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/ICategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/CategoryServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/ProductMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/ProductMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/metyou.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/metyou.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/dao/CartMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/dao/CartMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/CartMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/CartMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +84,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "Errors",
     "vue.rearranger.settings.migration": "true"
   }
@@ -105,6 +101,54 @@
   <component name="RunManager" selected="Tomcat Server.Tomcat 8.5.96">
     <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
+    </configuration>
+    <configuration name="BigDecimalTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="metyou-backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.metyou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.metyou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.metyou.test.BigDecimalTest" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BigDecimalTest.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="metyou-backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.metyou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.metyou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.metyou.test.BigDecimalTest" />
+      <option name="METHOD_NAME" value="test2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BigDecimalTest.test3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="metyou-backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.metyou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.metyou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.metyou.test.BigDecimalTest" />
+      <option name="METHOD_NAME" value="test3" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="Tomcat 8.5.96" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.96" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -195,6 +239,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BigDecimalTest.test3" />
+        <item itemvalue="JUnit.BigDecimalTest.test2" />
+        <item itemvalue="JUnit.BigDecimalTest.test1" />
         <item itemvalue="HTTP Request.generated-requests | #1" />
       </list>
     </recent_temporary>
@@ -208,7 +255,7 @@
       <option name="presentableId" value="Default" />
       <updated>1700306688185</updated>
       <workItem from="1700306689205" duration="9723000" />
-      <workItem from="1700317144524" duration="57332000" />
+      <workItem from="1700317144524" duration="69871000" />
     </task>
     <servers />
   </component>
@@ -235,9 +282,14 @@
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/metyou/service/impl/ProductServiceImpl.java</url>
-          <line>47</line>
-          <option name="timeStamp" value="23" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/metyou/util/BigDecimalUtil.java</url>
+          <line>10</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/metyou/service/impl/CartServiceImpl.java</url>
+          <line>102</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
