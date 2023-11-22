@@ -107,7 +107,7 @@ public class ProductServiceImpl implements IProductService {
         productDetailVO.setStock(product.getStock());
 
         //imageHost parentCategoryId createTime updateTime
-        productDetailVO.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix","http://img.metyou.com/"));
+        productDetailVO.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix","http://img.metyouedu.com/"));
 
         Category category = categoryMapper.selectByPrimaryKey(product.getCategoryId());
         if (category == null) {
@@ -145,7 +145,7 @@ public class ProductServiceImpl implements IProductService {
         productListVO.setId(product.getId());
         productListVO.setName(product.getName());
         productListVO.setCategoryId(product.getCategoryId());
-        productListVO.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix","http://img.metyou.com/"));
+        productListVO.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix","http://img.metyouedu.com/"));
         productListVO.setMainImage(product.getMainImage());
         productListVO.setPrice(product.getPrice());
         productListVO.setSubtitle(product.getSubtitle());

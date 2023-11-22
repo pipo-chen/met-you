@@ -108,7 +108,7 @@ public class CartServiceImpl implements ICartService {
         cartVO.setCartTotalPrice(cartTotalPrice);
         cartVO.setCartProductVOList(cartProductVOList);
         cartVO.setAllChecked(this.getAllCheckedStatus(userId));
-        cartVO.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix","http://img.metyou.com/"));
+        cartVO.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix","http://img.metyouedu.com/"));
 
         return cartVO;
     }

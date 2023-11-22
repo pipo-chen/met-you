@@ -141,11 +141,11 @@ public class ProductManagerController {
     @RequestMapping("upload")
     @ResponseBody
     public ServerResponse upload(HttpSession session, @RequestParam(value = "upload_file", required = false) MultipartFile file, HttpServletRequest request) {
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登录");
-        }
-        if (iUserService.checkAdminRole(user).isSuccess()) {
+//        User user = (User)session.getAttribute(Const.CURRENT_USER);
+//        if (user == null) {
+//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登录");
+//        }
+//        if (iUserService.checkAdminRole(user).isSuccess()) {
 
             String path = request.getSession().getServletContext().getRealPath("upload");
             String targetFileName = iFileService.upload(file, path);
@@ -156,9 +156,9 @@ public class ProductManagerController {
             fileMap.put("url", url);
 
             return ServerResponse.createBySuccess(fileMap);
-        } else {
-            return ServerResponse.createByErrorMessage("无权限操作");
-        }
+//        } else {
+//            return ServerResponse.createByErrorMessage("无权限操作");
+//        }
 
     }
 
