@@ -22,9 +22,39 @@ public class OrderItem {
 
     private BigDecimal totalPrice;
 
+    private Integer staffId;
+
+    private Date startserviceTime;
+
+    private Date endserviceTime;
+
     private Date createTime;
 
     private Date updateTime;
+
+    public Integer getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(Integer staffId) {
+        this.staffId = staffId;
+    }
+
+    public Date getStartserviceTime() {
+        return startserviceTime;
+    }
+
+    public void setStartserviceTime(Date startserviceTime) {
+        this.startserviceTime = startserviceTime;
+    }
+
+    public Date getEndserviceTime() {
+        return endserviceTime;
+    }
+
+    public void setEndserviceTime(Date endserviceTime) {
+        this.endserviceTime = endserviceTime;
+    }
 
     public OrderItem(Integer id, Integer userId, Long orderNo, Integer productId, String productName, String productImage, BigDecimal currentUnitPrice, Integer quantity, BigDecimal totalPrice, Date createTime, Date updateTime) {
         this.id = id;
@@ -36,6 +66,23 @@ public class OrderItem {
         this.currentUnitPrice = currentUnitPrice;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
+    public OrderItem(Integer id, Integer userId, Long orderNo, Integer productId, String productName, String productImage, BigDecimal currentUnitPrice, Integer quantity, BigDecimal totalPrice, Integer staffId, Date startserviceTime, Date endserviceTime, Date createTime, Date updateTime) {
+        this.id = id;
+        this.userId = userId;
+        this.orderNo = orderNo;
+        this.productId = productId;
+        this.productName = productName;
+        this.productImage = productImage;
+        this.currentUnitPrice = currentUnitPrice;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+        this.staffId = staffId;
+        this.startserviceTime = startserviceTime;
+        this.endserviceTime = endserviceTime;
         this.createTime = createTime;
         this.updateTime = updateTime;
     }

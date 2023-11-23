@@ -183,7 +183,7 @@
       stock = #{stock,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       service_time = #{serviceTime,jdbcType=INTEGER},
-      create_time = now(),
+      create_time = #{createTime, jdbcType=TIMESTAMP},
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>

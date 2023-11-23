@@ -12,13 +12,16 @@
       <arg column="current_unit_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
       <arg column="quantity" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="total_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="staff_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="startservice_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="endservice_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     id, user_id, order_no, product_id, product_name, product_image, current_unit_price, 
-    quantity, total_price, create_time, update_time
+    quantity, total_price, staff_id,startservice_time,endservice_time,create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -33,11 +36,11 @@
   <insert id="insert" parameterType="com.metyou.pojo.OrderItem">
     insert into mmall_order_item (id, user_id, order_no, 
       product_id, product_name, product_image, 
-      current_unit_price, quantity, total_price, 
+      current_unit_price, quantity, total_price, staff_id,startservice_time,endservice_time,
       create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, 
       #{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{productImage,jdbcType=VARCHAR}, 
-      #{currentUnitPrice,jdbcType=DECIMAL}, #{quantity,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL}, 
+      #{currentUnitPrice,jdbcType=DECIMAL}, #{quantity,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL},#{staffId,jdbcType=INTEGER},#{startserviceTime, jdbcType=TIMESTAMP},#{endserviceTime, jdbcType=TIMESTAMP}
       now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.metyou.pojo.OrderItem">
@@ -70,6 +73,15 @@
       <if test="totalPrice != null">
         total_price,
       </if>
+        <if test="staffId != null">
+          staff_id,
+        </if>
+        <if test="startserviceTime != null">
+          startservice_time,
+        </if>
+        <if test="endserviceTime != null">
+          endservice_time,
+        </if>
       <if test="createTime != null">
         create_time,
       </if>
@@ -104,6 +116,16 @@
       </if>
       <if test="totalPrice != null">
         #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="staffId != null">
+        #{staffId, jdbcType=INTEGER},
+      </if>
+
+      <if test="startserviceTime != null">
+        #{startserviceTime, jdbcType=TIMESTAMP},
+      </if>
+      <if test="endserviceTime != null">
+        #{endserviceTime, jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null">
         now(),
@@ -140,8 +162,17 @@
       <if test="totalPrice != null">
         total_price = #{totalPrice,jdbcType=DECIMAL},
       </if>
+    <if test="staffId != null">
+      staffId = #{staffId, jdbcType=INTEGER},
+    </if>
+        <if test="startserviceTime != null">
+        startserviceTime = #{startserviceTime, jdbcType=TIMESTAMP},
+        </if>
+        <if test="endserviceTime != null">
+         endserviceTime = #{endserviceTime, jdbcType=TIMESTAMP},
+        </if>
       <if test="createTime != null">
-        create_time = now(),
+        create_time = #{createTime, jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
         update_time = now(),
@@ -159,7 +190,10 @@
       current_unit_price = #{currentUnitPrice,jdbcType=DECIMAL},
       quantity = #{quantity,jdbcType=INTEGER},
       total_price = #{totalPrice,jdbcType=DECIMAL},
-      create_time = now(),
+      staff_id = #{staffId, jdbcType=INTEGER},
+      startservice_time = #{startserviceTime, jdbcType=TIMESTAMP},
+      endservice_time = #{endserviceTime, jdbcType=TIMESTAMP},
+      create_time = #{createTime, jdbcType=TIMESTAMP},
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
