@@ -10,8 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db12167e-df53-424c-a021-a8c453451319" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/libs/mysql-connector-java-8.0.11.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/datasource.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/datasource.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +89,9 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/metyou/util" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/libs" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 8.5.96">
@@ -246,7 +251,7 @@
       <option name="presentableId" value="Default" />
       <updated>1700306688185</updated>
       <workItem from="1700306689205" duration="9723000" />
-      <workItem from="1700317144524" duration="81536000" />
+      <workItem from="1700317144524" duration="82542000" />
     </task>
     <servers />
   </component>

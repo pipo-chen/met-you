@@ -1,6 +1,6 @@
 <html>
 <body>
-<h2>Hello World!</h2>
+<h2>你好，遇见!</h2>
 
 <form name="form1" action="/metyou_backend_war/manager/product/upload" method="post" enctype="multipart/form-data">
     <input type="file" name="upload_file"/>
