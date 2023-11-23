@@ -31,6 +31,16 @@ public class ProductDetailVO {
 
     private Integer parentCategoryId;
 
+    private Integer serviceTime;
+
+    public Integer getServiceTime() {
+        return serviceTime;
+    }
+
+    public void setServiceTime(Integer serviceTime) {
+        this.serviceTime = serviceTime;
+    }
+
     public Integer getId() {
         return id;
     }

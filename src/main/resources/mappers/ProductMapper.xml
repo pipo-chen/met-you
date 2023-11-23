@@ -13,12 +13,13 @@
       <arg column="price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
       <arg column="stock" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="service_time" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status, 
+    id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status, service_time,
     create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -35,12 +36,12 @@
     insert into mmall_product (id, category_id, name, 
       subtitle, main_image, sub_images, 
       detail, price, stock, 
-      status, create_time, update_time
+      status, service_time,create_time, update_time
       )
     values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{subtitle,jdbcType=VARCHAR}, #{mainImage,jdbcType=VARCHAR}, #{subImages,jdbcType=VARCHAR}, 
       #{detail,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{stock,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, now(), now()
+      #{status,jdbcType=INTEGER}, #{serviceTime, jdbcType=INTEGER},now(), now()
       )
   </insert>
   <insert id="insertSelective" parameterType="com.metyou.pojo.Product">
@@ -75,6 +76,9 @@
       </if>
       <if test="status != null">
         status,
+      </if>
+      <if test="serviceTime != null">
+        service_time,
       </if>
       <if test="createTime != null">
         create_time,
@@ -114,6 +118,9 @@
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
+      <if test="serviceTime != null">
+        #{serviceTime,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null">
         now(),
       </if>
@@ -152,6 +159,9 @@
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="serviceTime != null">
+        service_time = #{serviceTime,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null">
         create_time = now(),
       </if>
@@ -172,6 +182,7 @@
       price = #{price,jdbcType=DECIMAL},
       stock = #{stock,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
+      service_time = #{serviceTime,jdbcType=INTEGER},
       create_time = now(),
       update_time = now()
     where id = #{id,jdbcType=INTEGER}

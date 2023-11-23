@@ -103,6 +103,7 @@ public class ProductServiceImpl implements IProductService {
         productDetailVO.setCategoryId(product.getCategoryId());
         productDetailVO.setDetail(product.getDetail());
         productDetailVO.setName(product.getName());
+        productDetailVO.setServiceTime(product.getServiceTime());
         productDetailVO.setStatus(product.getStatus());
         productDetailVO.setStock(product.getStock());
 
@@ -150,6 +151,7 @@ public class ProductServiceImpl implements IProductService {
         productListVO.setPrice(product.getPrice());
         productListVO.setSubtitle(product.getSubtitle());
         productListVO.setStatus(product.getStatus());
+        productListVO.setServiceTime(product.getServiceTime());
         return productListVO;
     }
 

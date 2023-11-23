@@ -24,11 +24,21 @@ public class Product {
 
     private Integer status;
 
+    private Integer serviceTime;
+
     private Date createTime;
 
     private Date updateTime;
 
-    public Product(Integer id, Integer categoryId, String name, String subtitle, String mainImage, String subImages, String detail, BigDecimal price, Integer stock, Integer status, Date createTime, Date updateTime) {
+    public Integer getServiceTime() {
+        return serviceTime;
+    }
+
+    public void setServiceTime(Integer serviceTime) {
+        this.serviceTime = serviceTime;
+    }
+
+    public Product(Integer id, Integer categoryId, String name, String subtitle, String mainImage, String subImages, String detail, BigDecimal price, Integer stock, Integer status, Integer serviceTime, Date createTime, Date updateTime) {
         this.id = id;
         this.categoryId = categoryId;
         this.name = name;
@@ -39,6 +49,7 @@ public class Product {
         this.price = price;
         this.stock = stock;
         this.status = status;
+        this.serviceTime = serviceTime;
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
