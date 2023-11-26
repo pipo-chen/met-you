@@ -30,6 +30,8 @@ public class Product {
 
     private Date updateTime;
 
+    private Integer staffRole;
+
     public Integer getServiceTime() {
         return serviceTime;
     }
@@ -38,7 +40,15 @@ public class Product {
         this.serviceTime = serviceTime;
     }
 
-    public Product(Integer id, Integer categoryId, String name, String subtitle, String mainImage, String subImages, String detail, BigDecimal price, Integer stock, Integer status, Integer serviceTime, Date createTime, Date updateTime) {
+    public Integer getStaffRole() {
+        return staffRole;
+    }
+
+    public void setStaffRole(Integer staffRole) {
+        this.staffRole = staffRole;
+    }
+
+    public Product(Integer id, Integer categoryId, String name, String subtitle, String mainImage, String subImages, String detail, BigDecimal price, Integer stock, Integer status, Integer serviceTime, Date createTime, Date updateTime, Integer staffRole) {
         this.id = id;
         this.categoryId = categoryId;
         this.name = name;
@@ -52,6 +62,7 @@ public class Product {
         this.serviceTime = serviceTime;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.staffRole = staffRole;
     }
 
     public Product() {

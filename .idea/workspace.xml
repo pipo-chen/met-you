@@ -10,25 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db12167e-df53-424c-a021-a8c453451319" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/portal/OrderController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/IOrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/OrderServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/common/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/common/Const.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/ProductManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/ProductManagerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/controller/portal/StaffController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/StaffController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/controller/portal/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/portal/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/dao/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/dao/OrderMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/dao/StaffMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/dao/StaffMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/Staff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/IStaffService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/IStaffService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/StaffServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/StaffServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/OrderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/OrderMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/StaffMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/StaffMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/StaffController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/StaffController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/vo/ProductListVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/vo/ProductListVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/ProductMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/ProductMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,7 +253,7 @@
       <option name="presentableId" value="Default" />
       <updated>1700306688185</updated>
       <workItem from="1700306689205" duration="9723000" />
-      <workItem from="1700317144524" duration="120059000" />
+      <workItem from="1700317144524" duration="122067000" />
     </task>
     <servers />
   </component>

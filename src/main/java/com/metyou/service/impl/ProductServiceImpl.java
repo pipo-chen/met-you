@@ -152,6 +152,7 @@ public class ProductServiceImpl implements IProductService {
         productListVO.setSubtitle(product.getSubtitle());
         productListVO.setStatus(product.getStatus());
         productListVO.setServiceTime(product.getServiceTime());
+        productListVO.setStaffRole(product.getStaffRole());
         return productListVO;
     }
 

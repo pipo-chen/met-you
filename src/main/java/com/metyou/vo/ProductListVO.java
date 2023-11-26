@@ -21,6 +21,16 @@ public class ProductListVO {
 
     private Integer serviceTime;
 
+    private Integer staffRole;
+
+    public Integer getStaffRole() {
+        return staffRole;
+    }
+
+    public void setStaffRole(Integer staffRole) {
+        this.staffRole = staffRole;
+    }
+
     public Integer getServiceTime() {
         return serviceTime;
     }
