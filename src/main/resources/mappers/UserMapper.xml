@@ -12,12 +12,13 @@
       <arg column="answer" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="role" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="headpic" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, username, password, email, phone, question, answer, role,description,create_time, update_time
+    id, username, password, email, phone, question, answer, role,description,headpic,create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -32,11 +33,11 @@
   <insert id="insert" parameterType="com.metyou.pojo.User">
     insert into mmall_user (id, username, password, 
       email, phone, question, 
-      answer, role, description, create_time,
+      answer, role, description,headpic, create_time,
       update_time)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, 
-      #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{description, jdbcType=VARCHAR}, now(),
+      #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{description, jdbcType=VARCHAR},#{headpic, jdbcType=VARCHAR}, now(),
       now())
   </insert>
   <insert id="insertSelective" parameterType="com.metyou.pojo.User">
@@ -68,6 +69,9 @@
       </if>
       <if test="description != null">
         description,
+      </if>
+      <if test="headpic != null">
+        headpic,
       </if>
       <if test="createTime != null">
         create_time,
@@ -104,6 +108,9 @@
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
+      <if test="headpic != null">
+        #{headpic,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         now(),
       </if>
@@ -139,6 +146,9 @@
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
+      <if test="headpic != null">
+        headpic = #{headpic,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -158,6 +168,7 @@
       answer = #{answer,jdbcType=VARCHAR},
       role = #{role,jdbcType=INTEGER},
       description = #{description,jdbcType=VARCHAR},
+      headpic = #{headpic,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = now()
     where id = #{id,jdbcType=INTEGER}

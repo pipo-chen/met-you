@@ -27,7 +27,7 @@ public class UserController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @RequestMapping("login")
     @ResponseBody //自动序列化json
     public ServerResponse<User> login(String username, String password, HttpSession session) {
         // service - mybatis - dao

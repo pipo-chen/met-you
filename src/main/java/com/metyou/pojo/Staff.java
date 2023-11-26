@@ -17,18 +17,35 @@ public class Staff {
 
     private Integer status;
 
-    private String description;
+    private String detail;
 
     private String slogan;
 
     private String mainImage;
 
+    private String gender;
+
     private Date createTime;
 
     private Date updateTime;
 
-    public Staff(Integer id, String username, String wechat, String email, String phone, Integer role, Integer status, String description, String slogan, String mainImage, Date createTime, Date updateTime) {
+    public String getDetail() {
+        return detail;
+    }
 
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Staff(Integer id, String username, String wechat, String email, String phone, Integer role, Integer status, String detail, String slogan, String mainImage, String gender, Date createTime, Date updateTime) {
         this.id = id;
         this.username = username;
         this.wechat = wechat;
@@ -36,9 +53,10 @@ public class Staff {
         this.phone = phone;
         this.role = role;
         this.status = status;
-        this.description = description;
+        this.detail = detail;
         this.slogan = slogan;
         this.mainImage = mainImage;
+        this.gender = gender;
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
@@ -97,14 +115,6 @@ public class Staff {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getSlogan() {

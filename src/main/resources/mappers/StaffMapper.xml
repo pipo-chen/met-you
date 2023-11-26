@@ -10,15 +10,16 @@
             <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="role" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
-            <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="detail" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="slogan" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="main_image" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
             <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, username, wechat, email, phone, role, status, description,slogan,main_image, create_time, update_time
+        id, username, wechat, email, phone, role, status, detail,slogan,main_image, gender, create_time, update_time
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -30,131 +31,53 @@
         delete from mmall_staff
         where id = #{id,jdbcType=INTEGER}
     </delete>
+
     <insert id="insert" parameterType="com.metyou.pojo.Staff">
         insert into mmall_staff (id, username, wechat,
-                                email,phone, role, status,
-                                 description, slogan, main_image, create_time,
+                                email, phone, role, status,
+                                 detail, slogan, main_image,gender,create_time,
                                 update_time)
         values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR},
                 #{email,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},  #{role,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
-                #{description,jdbcType=VARCHAR}, #{slogan, jdbcType=VARCHAR},#{mainImage jdbcType=VARCHAR}, now(),
+                #{detail,jdbcType=VARCHAR}, #{slogan, jdbcType=VARCHAR},#{mainImage, jdbcType=VARCHAR},#{gender, jdbcType=VARCHAR}, now(),
                 now())
     </insert>
-    <insert id="insertSelective" parameterType="com.metyou.pojo.Staff">
-        insert into mmall_staff
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="username != null">
-                username,
-            </if>
-            <if test="wechat != null">
-                wechat,
-            </if>
-            <if test="email != null">
-                email,
-            </if>
-            <if test="phone != null">
-                phone,
-            </if>
-            <if test="role != null">
-                role,
-            </if>
-            <if test="status != null">
-                status,
-            </if>
-            <if test="description != null">
-                description,
-            </if>
-            <if test="slogan != null">
-                slogan,
-            </if>
-            <if test="mainImage != null">
-                main_image,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="updateTime != null">
-                update_time,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="username != null">
-                #{username,jdbcType=VARCHAR},
-            </if>
-            <if test="wechat != null">
-                #{wechat,jdbcType=VARCHAR},
-            </if>
-            <if test="email != null">
-                #{email,jdbcType=VARCHAR},
-            </if>
-            <if test="phone != null">
-                #{phone,jdbcType=VARCHAR},
-            </if>
-            <if test="role != null">
-                #{role,jdbcType=INTEGER},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=INTEGER},
-            </if>
-            <if test="description != null">
-                #{description,jdbcType=VARCHAR},
-            </if>
-            <if test="slogan != null">
-                #{slogan,jdbcType=VARCHAR},
-            </if>
-            <if test="mainImage != null">
-                #{mainImage,jdbcType=VARCHAR},
-            </if>
-            <if test="description != null">
-                #{description,jdbcType=VARCHAR},
-            </if>
 
-            <if test="createTime != null">
-                now(),
-            </if>
-            <if test="updateTime != null">
-                now(),
-            </if>
-        </trim>
-    </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.metyou.pojo.Staff">
         update mmall_staff
         <set>
             <if test="username != null">
-                #{username,jdbcType=VARCHAR},
+                username =  #{username,jdbcType=VARCHAR},
             </if>
             <if test="wechat != null">
-                #{wechat,jdbcType=VARCHAR},
+                wechat = #{wechat,jdbcType=VARCHAR},
             </if>
             <if test="email != null">
-                #{email,jdbcType=VARCHAR},
+                email = #{email,jdbcType=VARCHAR},
             </if>
             <if test="phone != null">
-                #{phone,jdbcType=VARCHAR},
+                phone = #{phone,jdbcType=VARCHAR},
             </if>
             <if test="role != null">
-                #{role,jdbcType=INTEGER},
+                role = #{role,jdbcType=INTEGER},
             </if>
             <if test="status != null">
-                #{status,jdbcType=INTEGER},
+                status =#{status,jdbcType=INTEGER},
             </if>
-            <if test="description != null">
-                #{description,jdbcType=VARCHAR},
+            <if test="detail != null">
+                detail =#{detail,jdbcType=VARCHAR},
             </if>
             <if test="slogan != null">
-                #{slogan,jdbcType=VARCHAR},
+                slogan= #{slogan,jdbcType=VARCHAR},
             </if>
             <if test="mainImage != null">
-                #{mainImage,jdbcType=VARCHAR},
+                mainImage = #{mainImage,jdbcType=VARCHAR},
             </if>
-            <if test="description != null">
-                #{description,jdbcType=VARCHAR},
+            <if test="gender != null">
+                gender =#{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="detail != null">
+                detail = #{detail,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -173,10 +96,11 @@
             phone = #{phone,jdbcType=VARCHAR},
             role = #{role,jdbcType=INTEGER},
             status = #{status,jdbcType=INTEGER},
-            description = #{description,jdbcType=VARCHAR},
+            detail = #{detail,jdbcType=VARCHAR},
             slogan = #{slogan,jdbcType=VARCHAR},
             main_image = #{mainImage,jdbcType=VARCHAR},
-            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            gender = #{gender,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
             update_time = now()
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -186,7 +110,7 @@
         from mmall_staff
         where 1 = 1
             <if test="id != null">
-                and id  = #{id}
+                and id = #{id}
             </if>
             <if test="role != null">
                 and role = #{role}
@@ -194,5 +118,16 @@
             <if test="status != null">
                 and status = #{status}
             </if>
+        ORDER BY status asc
     </select>
+    <update id="updateStatus" parameterType="map">
+        update mmall_staff
+        set status = #{status}
+        where id = #{id}
+    </update>
+    <update id="updateImage" parameterType="map">
+        update mmall_staff
+        set mainImage = #{mainImage}
+        where id = #{id}
+    </update>
 </mapper>

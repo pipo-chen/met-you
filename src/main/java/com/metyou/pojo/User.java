@@ -23,6 +23,8 @@ public class User {
 
     private String description;
 
+    private String headpic;
+
     private Date createTime;
 
     private Date updateTime;
@@ -32,7 +34,15 @@ public class User {
         super();
     }
 
-    public User(Integer id, String username, String password, String email, String phone, String question, String answer, Integer role, String description, Date createTime, Date updateTime) {
+    public String getHeadpic() {
+        return headpic;
+    }
+
+    public void setHeadpic(String headpic) {
+        this.headpic = headpic;
+    }
+
+    public User(Integer id, String username, String password, String email, String phone, String question, String answer, Integer role, String description, String headpic, Date createTime, Date updateTime) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -42,6 +52,7 @@ public class User {
         this.answer = answer;
         this.role = role;
         this.description = description;
+        this.headpic = headpic;
         this.createTime = createTime;
         this.updateTime = updateTime;
     }

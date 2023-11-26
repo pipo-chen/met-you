@@ -23,6 +23,7 @@ public class Const {
     }
 
     public interface Role {
+        int ROLE_MEMBER = 2; //会员
         int ROLE_CUSTOMER = 0; // 学员
         int ROLE_ADMIN = 1; //管理员
     }

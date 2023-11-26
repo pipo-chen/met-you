@@ -11,8 +11,6 @@ public interface StaffMapper {
 
     int insert(Staff record);
 
-    int insertSelective(Staff record);
-
     Staff selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(Staff record);
@@ -21,4 +19,7 @@ public interface StaffMapper {
 
     List<Staff> selectByIdorRoleOrStatus(@Param("id") Integer id, @Param("role") Integer role, @Param("status") Integer status);
 
+    int updateStatus(@Param("id") Integer id, @Param("status") Integer status);
+
+    int updateImage(@Param("id") Integer id, @Param("mainImage") String mainImage);
 }
