@@ -64,12 +64,11 @@ public class StaffController {
     @ResponseBody
     public ServerResponse changeStatus(HttpSession session, Integer staffId, Integer status) {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
-        //todo: user == null
-        if (false) {
+        if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登录");
         }
-        //todo: iUserService.checkAdminRole(user).isSuccess()
-        if (true) {
+
+        if (iUserService.checkAdminRole(user).isSuccess()) {
             return iStaffService.changeStatus(staffId, status);
         } else {
             return ServerResponse.createByErrorMessage("无权限操作");
@@ -86,12 +85,43 @@ public class StaffController {
     @ResponseBody
     ServerResponse updateStaffInfo(HttpSession session, Staff staff) {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
-        //todo: user == null
-        if (false) {
+        if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登录");
         }
-        //todo: iUserService.checkAdminRole(user).isSuccess()
-        if (true) {
+        if (iUserService.checkAdminRole(user).isSuccess()) {
+            return iStaffService.updateStaffInfo(staff);
+        } else {
+            return ServerResponse.createByErrorMessage("无权限操作");
+        }
+    }
+
+    /**
+     * 点击头像后，上传头像修改接口
+     * @param session
+     * @param staff
+     * @param file
+     * @param request
+     * @return
+     */
+    @RequestMapping("update_all_info")
+    @ResponseBody
+    ServerResponse updateAllStaffInfo(HttpSession session, Staff staff, @RequestParam(value = "image", required = false)MultipartFile file, HttpServletRequest request) {
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登录");
+        }
+        if (iUserService.checkAdminRole(user).isSuccess()) {
+            String path = request.getSession().getServletContext().getRealPath("upload");
+            String targetFileName = iFileService.upload(file, path);
+            String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + targetFileName;
+
+            Map fileMap = Maps.newHashMap();
+            fileMap.put("uri", targetFileName);
+            fileMap.put("url", url);
+            //再把targetFileName 存入数据库
+            staff.setMainImage(targetFileName);
+            //上传新头像之后，旧头像删除掉 旧头像地址
+            System.out.println("-->"+targetFileName);
             return iStaffService.updateStaffInfo(staff);
         } else {
             return ServerResponse.createByErrorMessage("无权限操作");
@@ -102,37 +132,24 @@ public class StaffController {
     @ResponseBody
     ServerResponse addStaff(HttpSession session, Staff staff) {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
-        //todo: user == null
-        if (false) {
+        if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登录");
         }
-        //todo: iUserService.checkAdminRole(user).isSuccess()
-        if (true) {
+        if (iUserService.checkAdminRole(user).isSuccess()) {
             return iStaffService.addStaff(staff);
         } else {
             return ServerResponse.createByErrorMessage("无权限操作");
         }
     }
 
-    /**
-     * 上传图片，并返回图片地址(未测试)
-     * @param session
-     * @param file
-     * @param request
-     * @return
-     */
-    @RequestMapping("add_img")
+    @RequestMapping("add_all_info")
     @ResponseBody
-    public ServerResponse addImg(HttpSession session, @RequestParam(value = "upload_file", required = false)MultipartFile file, HttpServletRequest request) {
-
+    ServerResponse addAllStaffInfo(HttpSession session, Staff staff, @RequestParam(value = "image", required = false)MultipartFile file, HttpServletRequest request) {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
-        //todo： user == null
-        if (false) {
+        if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登录");
         }
-        //todo：iUserService.checkAdminRole(user).isSuccess()
-        if (true) {
-
+        if (iUserService.checkAdminRole(user).isSuccess()) {
             String path = request.getSession().getServletContext().getRealPath("upload");
             String targetFileName = iFileService.upload(file, path);
             String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + targetFileName;
@@ -140,22 +157,21 @@ public class StaffController {
             Map fileMap = Maps.newHashMap();
             fileMap.put("uri", targetFileName);
             fileMap.put("url", url);
-            //再把targetFileName 存入数据库
-            return ServerResponse.createBySuccess(fileMap);
+            staff.setMainImage(targetFileName);
+            return iStaffService.addStaff(staff);
         } else {
             return ServerResponse.createByErrorMessage("无权限操作");
         }
     }
+
     @RequestMapping("delete_staff")
     @ResponseBody
     public ServerResponse deleteStaff(HttpSession session, Integer staffId) {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
-        //todo： user == null
-        if (false) {
+        if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登录");
         }
-        //todo：iUserService.checkAdminRole(user).isSuccess()
-        if (true) {
+        if (iUserService.checkAdminRole(user).isSuccess()) {
             return iStaffService.deleteStaff(staffId);
 
         } else {

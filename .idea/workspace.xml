@@ -12,10 +12,8 @@
     <list default="true" id="db12167e-df53-424c-a021-a8c453451319" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/StaffController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/StaffController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/ProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/vo/ProductListVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/vo/ProductListVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/ProductMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/ProductMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/StaffServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/StaffServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/StaffMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/StaffMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,7 +251,7 @@
       <option name="presentableId" value="Default" />
       <updated>1700306688185</updated>
       <workItem from="1700306689205" duration="9723000" />
-      <workItem from="1700317144524" duration="122067000" />
+      <workItem from="1700317144524" duration="130731000" />
     </task>
     <servers />
   </component>
@@ -280,9 +278,9 @@
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/metyou/service/impl/UserServiceImpl.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="40" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/metyou/service/impl/FileServiceImpl.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

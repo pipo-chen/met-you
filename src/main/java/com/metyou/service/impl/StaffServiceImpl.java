@@ -56,7 +56,7 @@ public class StaffServiceImpl implements IStaffService {
     public ServerResponse updateStaffInfo(Staff staff) {
         int rowCount = staffMapper.updateByPrimaryKeySelective(staff);
         if (rowCount > 0) {
-            return ServerResponse.createBySuccess("更新员工信息成功！");
+            return ServerResponse.createBySuccess("更新用户信息成功",staff);
         }
         return ServerResponse.createByErrorMessage("更新用户信息失败！");
 

@@ -71,7 +71,7 @@
                 slogan= #{slogan,jdbcType=VARCHAR},
             </if>
             <if test="mainImage != null">
-                mainImage = #{mainImage,jdbcType=VARCHAR},
+                main_image = #{mainImage,jdbcType=VARCHAR},
             </if>
             <if test="gender != null">
                 gender =#{gender,jdbcType=VARCHAR},
@@ -127,7 +127,7 @@
     </update>
     <update id="updateImage" parameterType="map">
         update mmall_staff
-        set mainImage = #{mainImage}
+        set main_image = #{mainImage}
         where id = #{id}
     </update>
 </mapper>
