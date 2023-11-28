@@ -118,6 +118,9 @@
             <if test="status != null">
                 and status = #{status}
             </if>
+        <if test="username != null" >
+            and username like #{username}
+        </if>
         ORDER BY status asc
     </select>
     <update id="updateStatus" parameterType="map">

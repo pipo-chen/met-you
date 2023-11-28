@@ -21,10 +21,11 @@ public class StaffServiceImpl implements IStaffService {
     private StaffMapper staffMapper;
 
     @Override
-    public ServerResponse<PageInfo> getStaffList(Integer id, Integer role, Integer status, int pageNum, int pageSize) {
+    public ServerResponse<PageInfo> getStaffList(Integer id, Integer role, Integer status, int pageNum, int pageSize, String username) {
         PageHelper.startPage(pageNum, pageSize);
         //开始判断逻辑，如果有id、role、status 搜索
-        List<Staff> staffList = staffMapper.selectByIdorRoleOrStatus(id, role, status);
+        username = new StringBuilder().append("%").append(username).append("%").toString();
+        List<Staff> staffList = staffMapper.selectByIdorRoleOrStatus(id, role, status, username);
         PageInfo pageResult = new PageInfo(staffList);
         pageResult.setList(staffList);
         return ServerResponse.createBySuccess(pageResult);

@@ -5,7 +5,7 @@ import com.metyou.common.ServerResponse;
 import com.metyou.pojo.Staff;
 
 public interface IStaffService {
-    ServerResponse<PageInfo> getStaffList(Integer id, Integer role, Integer status, int pageNum, int pageSize);
+    ServerResponse<PageInfo> getStaffList(Integer id, Integer role, Integer status, int pageNum, int pageSize, String username);
 
     ServerResponse changeStatus(Integer id, Integer status);
 

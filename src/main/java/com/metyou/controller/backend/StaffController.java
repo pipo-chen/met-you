@@ -36,7 +36,7 @@ public class StaffController {
     private IFileService iFileService;
 
     /**
-     * 查询监督员的列表
+     * 查询监督员的列表（支持通过 name 模糊搜索）
      * @param staffId
      * @param role
      * @param status
@@ -49,9 +49,10 @@ public class StaffController {
     public ServerResponse<PageInfo> list(@RequestParam(value = "staffId", required = false) Integer staffId,
                                          @RequestParam(value = "role", required = false) Integer role,
                                          @RequestParam(value = "status", required = false) Integer status,
+                                         @RequestParam(value = "username",required = false) String username,
                                          @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                          @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-        return iStaffService.getStaffList(staffId, role, status, pageNum, pageSize);
+        return iStaffService.getStaffList(staffId, role, status, pageNum, pageSize,username);
     }
 
     /**
