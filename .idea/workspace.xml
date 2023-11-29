@@ -10,8 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db12167e-df53-424c-a021-a8c453451319" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/CategoryManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/CategoryManagerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/UserManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/UserManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/ProductManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/ProductManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/StaffController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/StaffController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +251,7 @@
       <updated>1700306688185</updated>
       <workItem from="1700306689205" duration="9723000" />
       <workItem from="1700317144524" duration="134861000" />
-      <workItem from="1701222477469" duration="1196000" />
+      <workItem from="1701222477469" duration="1523000" />
     </task>
     <servers />
   </component>

@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/manager/staff")
+@RequestMapping("/manage/staff")
 public class StaffController {
 
     @Autowired
