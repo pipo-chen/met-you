@@ -11,7 +11,7 @@
             $.get("/manage/staff/list", {
                 username : "",
                 pageNum : "1",
-                pageSize:"38"
+                pageSize:"39"
             }, function (data) {
                 // 开始进行数据渲染
                 render(data.data.list);
