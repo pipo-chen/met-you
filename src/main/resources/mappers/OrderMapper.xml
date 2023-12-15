@@ -19,6 +19,42 @@
       <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
+
+  <select id="findAllOrderRelate" resultMap="findOrderProductUserMap">
+    select o.order_no as order_no, o.payment as payment,o.payment_type as payment_type,
+           o.payment_time as payment_time,
+           u.id as id,
+           u.username as username,
+           u.wechat as wechat,
+           i.product_id as product_id,
+           i.product_name as product_name,
+           i.current_unit_price as current_unit_price,
+           i.quantity as quantity,
+           i.product_image as product_image,
+           i.service_time as service_time,
+           i.delay_time as delay_time
+    from mmall_order o
+           left join mmall_user u
+                     on o.user_id = u.id
+           left join mmall_order_item i
+                     on o.order_no = i.order_no
+  </select>
+  <resultMap id="findOrderProductUserMap" type="com.metyou.vo.OrderProductVO" autoMapping="true">
+    <id column="order_no" property="orderNo"/>
+    <result column="payment" property="payment"/>
+    <result column="payment_type" property="paymentType"/>
+    <result column="payment_time" property="paymentTime"/>
+    <result column="id" property="id"/>
+    <result column="username" property="username"/>
+    <result column="wechat" property="wechat"/>
+    <result column="product_id" property="productId"/>
+    <result column="product_name" property="productName"/>
+    <result column="current_unit_price" property="currentUnitPrice"/>
+    <result column="quantity" property="quantity"/>
+    <result column="product_image" property="productImage"/>
+    <result column="service_time" property="serviceTime"/>
+    <result column="delay_time" property="delayTime"/>
+  </resultMap>
   <sql id="Base_Column_List">
     id, order_no, user_id, shipping_id, payment, payment_type, postage, status, payment_time, 
     send_time, end_time, close_time, create_time, update_time
@@ -204,5 +240,22 @@ select
     from mmall_order
     where user_id = #{userId} and order_no = #{orderNo}
 
+  </select>
+  <select id="findAllOrder" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List"/>
+    from mmall_order
+  </select>
+  <select id="searchOrderByUserIdOrStatus" parameterType="map" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List"/>
+    from mmall_order
+    where 1 = 1
+    <if test="userId != null">
+      and user_id = #{userId}
+    </if>
+    <if test="status != null">
+      and status = #{status}
+    </if>
   </select>
 </mapper>

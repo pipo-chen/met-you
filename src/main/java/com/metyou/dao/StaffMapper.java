@@ -2,7 +2,6 @@ package com.metyou.dao;
 
 import com.metyou.pojo.Staff;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Property;
 
 import java.util.List;
 

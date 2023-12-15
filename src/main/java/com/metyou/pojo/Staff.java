@@ -7,6 +7,8 @@ public class Staff {
 
     private String username;
 
+    private Integer age;
+
     private String wechat;
 
     private String email;
@@ -45,9 +47,18 @@ public class Staff {
         this.gender = gender;
     }
 
-    public Staff(Integer id, String username, String wechat, String email, String phone, Integer role, Integer status, String detail, String slogan, String mainImage, String gender, Date createTime, Date updateTime) {
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Staff(Integer id, String username, Integer age, String wechat, String email, String phone, Integer role, Integer status, String detail, String slogan, String mainImage, String gender, Date createTime, Date updateTime) {
         this.id = id;
         this.username = username;
+        this.age = age;
         this.wechat = wechat;
         this.email = email;
         this.phone = phone;

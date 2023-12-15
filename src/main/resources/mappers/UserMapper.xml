@@ -6,6 +6,7 @@
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="wechat" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="question" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -18,7 +19,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, username, password, email, phone, question, answer, role,description,headpic,create_time, update_time
+    id, username, password, wechat,email, phone, question, answer, role,description,headpic,create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -31,12 +32,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.metyou.pojo.User">
-    insert into mmall_user (id, username, password, 
+    insert into mmall_user (id, username, password, wechat,
       email, phone, question, 
       answer, role, description,headpic, create_time,
       update_time)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+            #{wechat,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR},
       #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{description, jdbcType=VARCHAR},#{headpic, jdbcType=VARCHAR}, now(),
       now())
   </insert>
@@ -51,6 +52,9 @@
       </if>
       <if test="password != null">
         password,
+      </if>
+      <if test="wechat!= null">
+        wechat,
       </if>
       <if test="email != null">
         email,
@@ -90,6 +94,9 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
+      </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
@@ -128,6 +135,9 @@
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="wechat != null">
+        wechat = #{wechat,jdbcType=VARCHAR},
+      </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
@@ -162,6 +172,7 @@
     update mmall_user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       question = #{question,jdbcType=VARCHAR},

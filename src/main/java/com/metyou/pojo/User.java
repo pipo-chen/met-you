@@ -11,6 +11,8 @@ public class User {
 
     private String password;
 
+    private String wechat;
+
     private String email;
 
     private String phone;
@@ -42,10 +44,34 @@ public class User {
         this.headpic = headpic;
     }
 
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
+    }
+
     public User(Integer id, String username, String password, String email, String phone, String question, String answer, Integer role, String description, String headpic, Date createTime, Date updateTime) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.question = question;
+        this.answer = answer;
+        this.role = role;
+        this.description = description;
+        this.headpic = headpic;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
+    public User(Integer id, String username, String password, String wechat, String email, String phone, String question, String answer, Integer role, String description, String headpic, Date createTime, Date updateTime) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.wechat = wechat;
         this.email = email;
         this.phone = phone;
         this.question = question;

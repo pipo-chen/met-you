@@ -32,6 +32,26 @@ public class OrderItem {
 
     private Date updateTime;
 
+    private Integer serviceTime;
+
+    private Integer delayTime;
+
+    public Integer getServiceTime() {
+        return serviceTime;
+    }
+
+    public void setServiceTime(Integer serviceTime) {
+        this.serviceTime = serviceTime;
+    }
+
+    public Integer getDelayTime() {
+        return delayTime;
+    }
+
+    public void setDelayTime(Integer delayTime) {
+        this.delayTime = delayTime;
+    }
+
     public Integer getStaffId() {
         return staffId;
     }
@@ -56,21 +76,7 @@ public class OrderItem {
         this.endserviceTime = endserviceTime;
     }
 
-    public OrderItem(Integer id, Integer userId, Long orderNo, Integer productId, String productName, String productImage, BigDecimal currentUnitPrice, Integer quantity, BigDecimal totalPrice, Date createTime, Date updateTime) {
-        this.id = id;
-        this.userId = userId;
-        this.orderNo = orderNo;
-        this.productId = productId;
-        this.productName = productName;
-        this.productImage = productImage;
-        this.currentUnitPrice = currentUnitPrice;
-        this.quantity = quantity;
-        this.totalPrice = totalPrice;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-    }
-
-    public OrderItem(Integer id, Integer userId, Long orderNo, Integer productId, String productName, String productImage, BigDecimal currentUnitPrice, Integer quantity, BigDecimal totalPrice, Integer staffId, Date startserviceTime, Date endserviceTime, Date createTime, Date updateTime) {
+    public OrderItem(Integer id, Integer userId, Long orderNo, Integer productId, String productName, String productImage, BigDecimal currentUnitPrice, Integer quantity, BigDecimal totalPrice, Integer staffId, Date startserviceTime, Date endserviceTime, Date createTime, Date updateTime, Integer serviceTime, Integer delayTime) {
         this.id = id;
         this.userId = userId;
         this.orderNo = orderNo;
@@ -85,6 +91,8 @@ public class OrderItem {
         this.endserviceTime = endserviceTime;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.serviceTime = serviceTime;
+        this.delayTime = delayTime;
     }
 
     public OrderItem() {
