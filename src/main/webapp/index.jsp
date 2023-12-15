@@ -28,7 +28,7 @@
                 html_st += "<div class='card'>"+
                     "<img src='"+imgPath+"'/>"+
                     " <span class='status'>"+status+"</span>"+
-                "<p class='name'>"+item['username']+"</p><p>("+item['age']+")岁  级别: "+level+"</p>"+
+                "<p class='name'>"+item['username']+"</p><p>级别: "+level+" 年龄：("+item['age']+") 性别: ("+item['gender']+")</p>" +
                 "<p>"+item['detail']+"</p></div>"
                 console.log(html_st)
             }
