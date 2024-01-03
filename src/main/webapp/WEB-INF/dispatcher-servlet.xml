@@ -37,14 +37,14 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-    <mvc:cors>
-        <mvc:mapping path="/**"
-                     allowed-origins="*"
-                     allowed-methods="GET,POST,DELETE,PUT"
-                     allowed-headers="Content-Type, Access-Control-Allow-Headers,Authorization,X-Requested-with"
-                     allow-credentials="true"
-        />
-    </mvc:cors>
+<!--    <mvc:cors>-->
+<!--        <mvc:mapping path="/**"-->
+<!--                     allowed-origins="*"-->
+<!--                     allowed-methods="GET,POST,DELETE,PUT"-->
+<!--                     allowed-headers="Content-Type, Access-Control-Allow-Headers,Authorization,X-Requested-with"-->
+<!--                     allow-credentials="true"-->
+<!--        />-->
+<!--    </mvc:cors>-->
 
 
     <!-- 文件上传 -->
