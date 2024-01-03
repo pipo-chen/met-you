@@ -38,10 +38,31 @@
     </script>
 </head>
 <body>
+<a href="product.jsp">≤˙∆∑ΩÈ…‹</a>
 <div id="content"></div>
 </body>
 </html>
 <style>
+    .nav {
+        list-style: none;
+        display: flex;
+        justify-content: space-evenly;
+        height: 40px;
+        align-items: center;
+        background-color: #F8F8F8;
+        border-radius: 20px;
+    }
+    li.active {
+        color: #4D48C0;
+        border-bottom:  2px solid #4D48C0;
+    }
+    .title {
+        line-height: 40px;
+        position: absolute;
+        top: 10px;
+        margin-left: 15px;
+    }
+
     .card {
         width: 90%;
         height: 100%;
@@ -50,9 +71,9 @@
         padding-right: 5%;
         padding-top:2%;
         padding-bottom: 2%;
-        margin-bottom: 4px;
         background-color: antiquewhite;
         font-size: 12px;
+        margin-bottom: 15px;
     }
     .card img{
         height: 80px;
