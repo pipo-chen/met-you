@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
-@CrossOrigin(origins = {"http://www.metyouedu.com","null"})
+@CrossOrigin
 @Controller
 @RequestMapping("/manage/staff")
 public class StaffController {
