@@ -13,6 +13,7 @@ import com.metyou.service.IUserService;
 import com.metyou.util.PropertiesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
+@CrossOrigin(origins = {"http://www.metyouedu.com","null"})
 @Controller
 @RequestMapping("/manage/staff")
 public class StaffController {
