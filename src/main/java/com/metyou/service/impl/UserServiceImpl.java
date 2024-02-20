@@ -202,4 +202,18 @@ public class UserServiceImpl implements IUserService {
         }
         return ServerResponse.createByError();
     }
+
+    /**
+     * 根据用户id，查询相关用户信息
+     * @param userId
+     * @return
+     */
+    @Override
+    public ServerResponse<User> getUserInfoById(Integer userId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        if (user == null) {
+            return ServerResponse.createByErrorMessage("找不到当前用户id");
+        }
+        return ServerResponse.createBySuccess(user);
+    }
 }

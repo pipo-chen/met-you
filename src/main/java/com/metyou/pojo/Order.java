@@ -10,6 +10,8 @@ public class Order {
 
     private Integer userId;
 
+    private String userWechat;
+
     private Integer shippingId;
 
     private BigDecimal payment;
@@ -32,10 +34,11 @@ public class Order {
 
     private Date updateTime;
 
-    public Order(Integer id, Long orderNo, Integer userId, Integer shippingId, BigDecimal payment, Integer paymentType, Integer postage, Integer status, Date paymentTime, Date sendTime, Date endTime, Date closeTime, Date createTime, Date updateTime) {
+    public Order(Integer id, Long orderNo, Integer userId, String userWechat, Integer shippingId, BigDecimal payment, Integer paymentType, Integer postage, Integer status, Date paymentTime, Date sendTime, Date endTime, Date closeTime, Date createTime, Date updateTime) {
         this.id = id;
         this.orderNo = orderNo;
         this.userId = userId;
+        this.userWechat = userWechat;
         this.shippingId = shippingId;
         this.payment = payment;
         this.paymentType = paymentType;
@@ -47,6 +50,14 @@ public class Order {
         this.closeTime = closeTime;
         this.createTime = createTime;
         this.updateTime = updateTime;
+    }
+
+    public String getUserWechat() {
+        return userWechat;
+    }
+
+    public void setUserWechat(String userWechat) {
+        this.userWechat = userWechat;
     }
 
     public Order() {

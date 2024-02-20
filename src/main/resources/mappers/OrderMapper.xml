@@ -6,6 +6,7 @@
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="order_no" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_wechat" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="shipping_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="payment" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
       <arg column="payment_type" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -56,7 +57,7 @@
     <result column="delay_time" property="delayTime"/>
   </resultMap>
   <sql id="Base_Column_List">
-    id, order_no, user_id, shipping_id, payment, payment_type, postage, status, payment_time, 
+    id, order_no, user_id, user_wechat, shipping_id, payment, payment_type, postage, status, payment_time,
     send_time, end_time, close_time, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -70,12 +71,13 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.metyou.pojo.Order">
-    insert into mmall_order (id, order_no, user_id, 
+    insert into mmall_order (id, order_no, user_id, user_wechat,
       shipping_id, payment, payment_type, 
       postage, status, payment_time, 
       send_time, end_time, close_time, 
       create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, 
+
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{userWechat,jdbcType=VARCHAR},
       #{shippingId,jdbcType=INTEGER}, #{payment,jdbcType=DECIMAL}, #{paymentType,jdbcType=INTEGER}, 
       #{postage,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP}, 
       #{sendTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, 
@@ -93,6 +95,9 @@
       <if test="userId != null">
         user_id,
       </if>
+        <if test="userWechat != null">
+          user_wechat,
+        </if>
       <if test="shippingId != null">
         shipping_id,
       </if>
@@ -137,6 +142,10 @@
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
+        <if test="userWechat != null">
+          #{userWechat, jdbcType=VARCHAR},
+
+        </if>
       <if test="shippingId != null">
         #{shippingId,jdbcType=INTEGER},
       </if>
@@ -181,6 +190,9 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
+        <if test="userWechat != null">
+          user_wechat = #{userWechat, jdbcType=VARCHAR},
+        </if>
       <if test="shippingId != null">
         shipping_id = #{shippingId,jdbcType=INTEGER},
       </if>
@@ -221,6 +233,7 @@
     update mmall_order
     set order_no = #{orderNo,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=INTEGER},
+      user_wechat = #{userWechat, jdbcType=VARCHAR},
       shipping_id = #{shippingId,jdbcType=INTEGER},
       payment = #{payment,jdbcType=DECIMAL},
       payment_type = #{paymentType,jdbcType=INTEGER},
@@ -239,7 +252,6 @@ select
     <include refid="Base_Column_List"/>
     from mmall_order
     where user_id = #{userId} and order_no = #{orderNo}
-
   </select>
   <select id="findAllOrder" resultMap="BaseResultMap">
     select

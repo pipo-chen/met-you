@@ -23,6 +23,12 @@ public class User {
 
     private Integer role;
 
+    private Integer balance;
+
+    private Integer integral;
+
+    private Integer level;
+
     private String description;
 
     private String headpic;
@@ -50,6 +56,49 @@ public class User {
 
     public void setWechat(String wechat) {
         this.wechat = wechat;
+    }
+
+    public Integer getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Integer balance) {
+        this.balance = balance;
+    }
+
+    public Integer getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(Integer integral) {
+        this.integral = integral;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public User(Integer id, String username, String password, String wechat, String email, String phone, String question, String answer, Integer role, Integer balance, Integer integral, Integer level, String description, String headpic, Date createTime, Date updateTime) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.wechat = wechat;
+        this.email = email;
+        this.phone = phone;
+        this.question = question;
+        this.answer = answer;
+        this.role = role;
+        this.balance = balance;
+        this.integral = integral;
+        this.level = level;
+        this.description = description;
+        this.headpic = headpic;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
     }
 
     public User(Integer id, String username, String password, String email, String phone, String question, String answer, Integer role, String description, String headpic, Date createTime, Date updateTime) {
