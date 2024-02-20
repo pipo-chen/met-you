@@ -37,7 +37,7 @@
   <insert id="insert" parameterType="com.metyou.pojo.User">
     insert into mmall_user (id, username, password, wechat,
       email, phone, question, 
-      answer, role, description,headpic, create_time,
+      answer, role,balance,integral,level,description,headpic, create_time,
       update_time)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
             #{wechat,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR},
