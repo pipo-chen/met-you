@@ -2,6 +2,7 @@ package com.metyou.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class User {
@@ -23,13 +24,13 @@ public class User {
 
     private Integer role;
 
-    private Integer balance;
+    private BigDecimal balance;
 
     private Integer integral;
 
     private Integer level;
 
-    private String description;
+    private String detail;
 
     private String headpic;
 
@@ -58,11 +59,11 @@ public class User {
         this.wechat = wechat;
     }
 
-    public Integer getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(Integer balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
@@ -82,7 +83,7 @@ public class User {
         this.level = level;
     }
 
-    public User(Integer id, String username, String password, String wechat, String email, String phone, String question, String answer, Integer role, Integer balance, Integer integral, Integer level, String description, String headpic, Date createTime, Date updateTime) {
+    public User(Integer id, String username, String password, String wechat, String email, String phone, String question, String answer, Integer role, BigDecimal balance, Integer integral, Integer level, String detail, String headpic, Date createTime, Date updateTime) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -95,13 +96,13 @@ public class User {
         this.balance = balance;
         this.integral = integral;
         this.level = level;
-        this.description = description;
+        this.detail = detail;
         this.headpic = headpic;
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
 
-    public User(Integer id, String username, String password, String email, String phone, String question, String answer, Integer role, String description, String headpic, Date createTime, Date updateTime) {
+    public User(Integer id, String username, String password, String email, String phone, String question, String answer, Integer role, String detail, String headpic, Date createTime, Date updateTime) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -110,13 +111,13 @@ public class User {
         this.question = question;
         this.answer = answer;
         this.role = role;
-        this.description = description;
+        this.detail = detail;
         this.headpic = headpic;
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
 
-    public User(Integer id, String username, String password, String wechat, String email, String phone, String question, String answer, Integer role, String description, String headpic, Date createTime, Date updateTime) {
+    public User(Integer id, String username, String password, String wechat, String email, String phone, String question, String answer, Integer role, String detail, String headpic, Date createTime, Date updateTime) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -126,7 +127,7 @@ public class User {
         this.question = question;
         this.answer = answer;
         this.role = role;
-        this.description = description;
+        this.detail = detail;
         this.headpic = headpic;
         this.createTime = createTime;
         this.updateTime = updateTime;
@@ -184,12 +185,12 @@ public class User {
         return answer;
     }
 
-    public String getDescription() {
-        return description;
+    public String getdetail() {
+        return detail;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setdetail(String detail) {
+        this.detail = detail;
     }
 
     public void setAnswer(String answer) {

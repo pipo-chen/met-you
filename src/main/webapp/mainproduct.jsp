@@ -9,74 +9,67 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>配套产品介绍</title>
+    <title>监督产品介绍</title>
 </head>
 <script>
     function window_onload() {
         list = [
             {
-                "title" : "1. 周末监督卡（单项主贝）",
-                "title_tag": "会员专享",
+                "title" : "1. 作息/手机监督",
+                "title_tag": "",
                 "services": [
-                    "周末两天监督",
-                    "周末卡，不支持请假延期"
+                    "监督早睡早起、起床打卡",
+                    "通过睡前设备使用情况查寝",
+                    "根据执行情况奖惩",
+                    "根据要求系统随机匹配监督"
                 ],
-                "price": "指定产品 周卡价 * 5折  * 会员折扣",
+                "price": "¥89/周     ¥320/月",
                 "price_tag" : ""
             },
             {
-                "title" : "2. 工作日卡（单项主贝/模拟）",
-                "title_tag": "会员专享",
+                "title" : "2. 基础常规监督(学习/减肥/运动)择一",
+                "title_tag": "",
                 "services": [
-                    "工作日每天可指定时段4h（要求时段必须连续，例19:00-23:00，当周时段一经确认，不可变更）",
-                    "仅支持工作日使用5天，不支持请假延期",
-                    "节假日无法使用"
+                    "纯打卡监督，无陪伴闲聊，学习打卡",
+                    "根据完成度奖惩训诫",
+                    "根据要求系统随机匹配监督"
                 ],
-                "price": "指定产品 周卡价 * 6.8折  * 会员折扣",
+                "price": "¥119/周     ¥428/月",
                 "price_tag" : ""
             },
             {
-                "title" : "3. 圈内树洞连麦",
+                "title" : "3. 单项主贝监督🔥 （可指定）",
                 "title_tag": "",
                 "services": [
-                    "语音沟通，由资深圈主带你答疑解惑，技巧分享、帮助提供情感、关系处理等情绪树洞"
+                    "学习/减肥/运动任选其一（30m-60m提醒）",
+                    "开放在线自习室，每日计划执行落地",
+                    "计划过程督促提醒、完成度、质量检查",
+                    "复盘奖惩，选赠1次语音训诫/督惩(30min)"
                 ],
-                "price": "¥168/小时",
-                "price_tag" : ""
+                "price": "¥190/周     ¥625/月",
+                "price_tag" : "会员低至¥581/月"
             },
             {
-                "title" : "4. 圈内树洞文字",
+                "title" : "4. 模拟哥哥/姐姐（可指定）",
                 "title_tag": "",
                 "services": [
-                    "文字交流，帮助提供情感、关系等情绪树洞"
+                    "高质管教，学习或生活三项左右(管教性质)",
+                    "好友列表星标优先，定制性家规/家法、控单",
+                    "结果奖惩，含1次视频/连麦督惩（30min）",
+                    "严格督促的同时，也提供暖心陪伴"
                 ],
-                "price": "¥128/小时",
-                "price_tag" : ""
+                "price": "¥288/周     ¥1036/月",
+                "price_tag" : "会员低至¥881/月"
             },
             {
-                "title" : "5. 语音/连麦督惩",
+                "title" : "5. 店主监督",
                 "title_tag": "",
                 "services": [
-                    "语音连麦，在线协助执行惩罚（可配套监督）"
+                    "单项主贝监督（¥219/周 ¥710/月）",
+                    "模拟哥哥"
                 ],
-                "price": "¥100/40分钟",
+                "price": "¥1520/月",
                 "price_tag" : ""
-            },{
-                "title" : "6. 视频督惩",
-                "title_tag": "",
-                "services": [
-                    "视频连麦，在线协助执行惩罚（可配套监督），在线实践"
-                ],
-                "price": "¥148/40分钟",
-                "price_tag" : "会员低至¥85"
-            },{
-                "title" : "7. 语音/视频抽背",
-                "title_tag": "",
-                "services": [
-                    "知识点发送，根据内容进行抽背，可配套监督"
-                ],
-                "price": "¥25/20分钟",
-                "price_tag" : "会员低至¥21"
             }
         ]
         render(list)
@@ -110,8 +103,8 @@
 <div class="header">
     <ul class="ul-nav">
         <li><a href="index.jsp">首页</a></li>
-        <li><a href="mainproduct.jsp">监督产品</a></li>
-        <li class="active"><a href="product.jsp">配套产品</a></li>
+        <li class="active"><a href="mainproduct.jsp">监督产品</a></li>
+        <li><a href="product.jsp">配套产品</a></li>
         <li><a href="recharge.jsp">会员充值</a></li>
     </ul>
 </div>
@@ -161,6 +154,10 @@
         text-decoration: none;
         color:white;
     }
+    .content {
+        width: 84%;
+        margin-left: 8%;
+    }
 
     img {
         width: 50px;
@@ -172,10 +169,6 @@
         padding-bottom: 10px;
         color: #7E7E7E;
         font-weight: lighter;
-    }
-    .content {
-        width: 84%;
-        margin-left: 8%;
     }
     #ul-detail {
         display: inline-block;
@@ -215,9 +208,9 @@
         display: inline-block;
     }
     .footer-note {
-        margin-top: -10px;
-        padding: 20px;
-        font-size: 13px;
-        color: #7E7E7E;
-    }
+         margin-top: -10px;
+         padding: 20px;
+         font-size: 13px;
+         color: #7E7E7E;
+     }
 </style>

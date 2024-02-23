@@ -1,5 +1,7 @@
 package com.metyou.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.metyou.common.Const;
 import com.metyou.common.ServerResponse;
 import com.metyou.common.TokenCache;
@@ -11,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service("iUserService")
@@ -169,7 +172,7 @@ public class UserServiceImpl implements IUserService {
         updateUser.setPhone(user.getPhone());
         updateUser.setQuestion(user.getQuestion());
         updateUser.setAnswer(user.getAnswer());
-        updateUser.setDescription(user.getDescription());
+        updateUser.setdetail(user.getdetail());
         int updateCount = userMapper.updateByPrimaryKeySelective(updateUser);
         if (updateCount > 0) {
             return ServerResponse.createBySuccess("更新个人信息成功", updateUser);
@@ -215,5 +218,18 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByErrorMessage("找不到当前用户id");
         }
         return ServerResponse.createBySuccess(user);
+    }
+    @Override
+    public ServerResponse<PageInfo> getMemberList(int pageNum, int pageSize, String wechat) {
+        PageHelper.startPage(pageNum, pageSize);
+        wechat = new StringBuilder().append("%").append(wechat).append("%").toString();
+        List<User> members = userMapper.getMemberList(wechat);
+
+        if (members == null) {
+            return ServerResponse.createByErrorMessage("未找到会员");
+        }
+        PageInfo pageResult = new PageInfo(members);
+        pageResult.setList(members);
+        return ServerResponse.createBySuccess(pageResult);
     }
 }

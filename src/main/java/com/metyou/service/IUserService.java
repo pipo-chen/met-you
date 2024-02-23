@@ -1,5 +1,6 @@
 package com.metyou.service;
 
+import com.github.pagehelper.PageInfo;
 import com.metyou.common.ServerResponse;
 import com.metyou.pojo.User;
 
@@ -25,4 +26,6 @@ public interface IUserService {
     ServerResponse checkAdminRole(User user);
 
     ServerResponse<User> getUserInfoById(Integer userId);
+
+    ServerResponse<PageInfo> getMemberList(int pageNum, int pageSize, String wechat);
 }
