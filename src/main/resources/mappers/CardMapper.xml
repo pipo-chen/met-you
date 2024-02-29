@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.metyou.dao.CardMapper">
+  <resultMap id="BaseResultMap" type="com.metyou.pojo.Card">
+    <constructor>
+      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="wechat" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="level" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="service" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="balance" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="note" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, wechat, username, level, status, service,balance,create_time,note
+  </sql>
+  <insert id="insert" parameterType="com.metyou.pojo.Card">
+    insert into card (id, user_id, wechat, 
+      username, level, status, 
+      service, balance, create_time, 
+      note)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{wechat,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{service,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.metyou.pojo.Card">
+    insert into card
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="wechat != null">
+        wechat,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="service != null">
+        service,
+      </if>
+      <if test="balance != null">
+        balance,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="service != null">
+        #{service,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="searchCard" parameterType="map" resultMap="BaseResultMap">
+  SELECT <include refid="Base_Column_List"/>
+  FROM card
+  WHERE user_id = #{userId}
+    <if test="status != -1">
+      and status = #{status}
+    </if>
+  </select>
+</mapper>

@@ -7,6 +7,7 @@
             <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="age" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="wechat" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="belong" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="role" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -20,7 +21,7 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, username,age, wechat, email, phone, role, status, detail,slogan,main_image, gender, create_time, update_time
+        id, username,age, wechat,belong, email, phone, role, status, detail,slogan,main_image, gender, create_time, update_time
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -34,11 +35,11 @@
     </delete>
 
     <insert id="insert" parameterType="com.metyou.pojo.Staff">
-        insert into mmall_staff (id, username, age,wechat,
+        insert into mmall_staff (id, username, age,wechat,belong,
                                 email, phone, role, status,
                                  detail, slogan, main_image,gender,create_time,
                                 update_time)
-        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR},#{age,jdbcType=INTEGER}, #{wechat,jdbcType=VARCHAR},
+        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR},#{age,jdbcType=INTEGER}, #{wechat,jdbcType=VARCHAR},#{belong,jdbcType=INTEGER},
                 #{email,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},  #{role,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
                 #{detail,jdbcType=VARCHAR}, #{slogan, jdbcType=VARCHAR},#{mainImage, jdbcType=VARCHAR},#{gender, jdbcType=VARCHAR}, now(),
                 now())
@@ -55,6 +56,9 @@
             </if>
             <if test="wechat != null">
                 wechat = #{wechat,jdbcType=VARCHAR},
+            </if>
+            <if test="belong != null">
+                belong = #{belong, jdbcType=INTEGER},
             </if>
             <if test="email != null">
                 email = #{email,jdbcType=VARCHAR},
@@ -97,6 +101,7 @@
         set username = #{username,jdbcType=VARCHAR},
             age = #{age,jdbcType=INTEGER},
             wechat = #{wechat,jdbcType=VARCHAR},
+            belong = #{belong,jdbcType=INTEGER},
             email = #{email,jdbcType=VARCHAR},
             phone = #{phone,jdbcType=VARCHAR},
             role = #{role,jdbcType=INTEGER},
@@ -125,6 +130,9 @@
             </if>
         <if test="username != null" >
             and username like #{username}
+        </if>
+        <if test="belong != null" >
+            and belong = #{belong}
         </if>
         ORDER BY status asc
     </select>

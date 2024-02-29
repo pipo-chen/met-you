@@ -11,6 +11,8 @@ public class Staff {
 
     private String wechat;
 
+    private Integer belong;
+
     private String email;
 
     private String phone;
@@ -55,11 +57,20 @@ public class Staff {
         this.age = age;
     }
 
-    public Staff(Integer id, String username, Integer age, String wechat, String email, String phone, Integer role, Integer status, String detail, String slogan, String mainImage, String gender, Date createTime, Date updateTime) {
+    public Integer getBelong() {
+        return belong;
+    }
+
+    public void setBelong(Integer belong) {
+        this.belong = belong;
+    }
+
+    public Staff(Integer id, String username, Integer age, String wechat, Integer belong, String email, String phone, Integer role, Integer status, String detail, String slogan, String mainImage, String gender, Date createTime, Date updateTime) {
         this.id = id;
         this.username = username;
         this.age = age;
         this.wechat = wechat;
+        this.belong = belong;
         this.email = email;
         this.phone = phone;
         this.role = role;

@@ -18,6 +18,7 @@
     <li ><a href="mainproduct.jsp">监督产品</a></li>
     <li><a href="product.jsp">配套产品</a></li>
     <li class="active"><a href="recharge.jsp">会员充值</a></li>
+    <li><a href="login.jsp">会员登录</a></li>
   </ul>
 </div>
 <img src="http://img.metyouedu.com/member.png">

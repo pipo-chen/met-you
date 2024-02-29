@@ -1,7 +1,7 @@
 <%--
   Created by IntelliJ IDEA.
   User: mk
-  Date: 2023/12/21
+  Date: 2024/02/27
   Time: 15:37
   To change this template use File | Settings | File Templates.
 --%>
@@ -113,6 +113,7 @@
         <li><a href="mainproduct.jsp">监督产品</a></li>
         <li class="active"><a href="product.jsp">配套产品</a></li>
         <li><a href="recharge.jsp">会员充值</a></li>
+        <li><a href="login.jsp">会员登录</a></li>
     </ul>
 </div>
 <div class="content">

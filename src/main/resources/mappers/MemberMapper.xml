@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.metyou.dao.MemberMapper">
+  <resultMap id="BaseResultMap" type="com.metyou.pojo.Member">
+    <constructor>
+      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="wechat" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="headimg" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="role" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="tag" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="points" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="birthday" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="note" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.metyou.pojo.Member">
+    insert into member (id, username, wechat, 
+      password, headimg, role, 
+      tag, points, comment, 
+      birthday, create_time, note
+      )
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{headimg,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, 
+      #{tag,jdbcType=VARCHAR}, #{points,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.metyou.pojo.Member">
+    insert into member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="wechat != null">
+        wechat,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="headimg != null">
+        headimg,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+      <if test="points != null">
+        points,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null">
+        #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="points != null">
+        #{points,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -17,7 +17,7 @@ public interface StaffMapper {
 
     int updateByPrimaryKey(Staff record);
 
-    List<Staff> selectByIdorRoleOrStatus(@Param("id") Integer id, @Param("role") Integer role, @Param("status") Integer status, @Param("username") String username);
+    List<Staff> selectByIdorRoleOrStatus(@Param("id") Integer id, @Param("role") Integer role, @Param("status") Integer status, @Param("username") String username, @Param("belong")Integer belong);
 
     int updateStatus(@Param("id") Integer id, @Param("status") Integer status);
 

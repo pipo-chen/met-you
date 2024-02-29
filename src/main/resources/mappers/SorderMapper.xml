@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.metyou.dao.SorderMapper">
+  <resultMap id="BaseResultMap" type="com.metyou.pojo.Sorder">
+    <constructor>
+      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="commodity_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="supervis_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="supervis_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sale_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="origin_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="payway" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="balance" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="card_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="begin_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="end_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="note" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, commodity_id, supervis_id, supervis_name, sale_price, origin_price,payway,status,balance, card_id,begin_time,end_time,note,create_time
+  </sql>
+  <insert id="insert" parameterType="com.metyou.pojo.Sorder">
+    insert into sorder (id, user_id, commodity_id, 
+      supervis_id, supervis_name, sale_price, 
+      origin_price, payway, status, balance,
+      card_id, begin_time, end_time, 
+      note,create_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{commodityId,jdbcType=INTEGER}, 
+      #{supervisId,jdbcType=INTEGER}, #{supervisName,jdbcType=VARCHAR}, #{salePrice,jdbcType=DECIMAL}, 
+      #{originPrice,jdbcType=DECIMAL}, #{payway,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},  #{balance,jdbcType=DECIMAL},
+            #{cardId,jdbcType=INTEGER}, #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+      #{note,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.metyou.pojo.Sorder">
+    insert into sorder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="supervisId != null">
+        supervis_id,
+      </if>
+      <if test="supervisName != null">
+        supervis_name,
+      </if>
+      <if test="salePrice != null">
+        sale_price,
+      </if>
+      <if test="originPrice != null">
+        origin_price,
+      </if>
+      <if test="payway != null">
+        payway,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+        <if test="balance != null">
+          balance,
+        </if>
+      <if test="cardId != null">
+        card_id,
+      </if>
+      <if test="beginTime != null">
+        begin_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="supervisId != null">
+        #{supervisId,jdbcType=INTEGER},
+      </if>
+      <if test="supervisName != null">
+        #{supervisName,jdbcType=VARCHAR},
+      </if>
+      <if test="salePrice != null">
+        #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="originPrice != null">
+        #{originPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="payway != null">
+        #{payway,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=INTEGER},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="searchSorder" parameterType="map" resultMap="BaseResultMap">
+    SELECT
+        <include refid="Base_Column_List"/>
+        from sorder
+    where user_id = #{userId}
+    <if test="cardId != -1">
+      and card_id = #{cardId}
+    </if>
+    <if test="payway != -1">
+      and payway = #{payway}
+    </if>
+    ORDER BY create_time DESC
+  </select>
+</mapper>

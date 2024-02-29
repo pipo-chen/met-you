@@ -51,10 +51,11 @@ public class StaffController {
     public ServerResponse<PageInfo> list(@RequestParam(value = "staffId", required = false) Integer staffId,
                                          @RequestParam(value = "role", required = false) Integer role,
                                          @RequestParam(value = "status", required = false) Integer status,
+                                         @RequestParam(value = "belong", defaultValue = "1") Integer belong,
                                          @RequestParam(value = "username",required = false) String username,
                                          @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                          @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-        return iStaffService.getStaffList(staffId, role, status, pageNum, pageSize,username);
+        return iStaffService.getStaffList(staffId, role, status, pageNum, pageSize,username,belong);
     }
 
     /**
