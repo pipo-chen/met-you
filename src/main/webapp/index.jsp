@@ -54,7 +54,8 @@
     body {
         margin: 0;
         padding: 0;
-        background-image: linear-gradient(#0A2432, #080808);
+        background-color: #080808;
+        /*background-image: linear-gradient(#0A2432, #080808);*/
     }
     .active {
         background-color: darkred;

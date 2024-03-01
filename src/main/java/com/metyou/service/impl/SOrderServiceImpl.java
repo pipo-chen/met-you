@@ -67,4 +67,18 @@ public class SOrderServiceImpl implements ISOrderService {
         }
         return ServerResponse.createBySuccess(data);
     }
+
+    @Override
+    public ServerResponse recharge(Sorder sorder) {
+        //开始增加订单
+        if (sorder.getPayway() == 4 ) {
+            if (sorder.getBalance().floatValue() < 1 || sorder.getBalance().floatValue() - sorder.getSalePrice().floatValue() < 1)
+                return ServerResponse.createByErrorMessage("余额不足!");
+        }
+        int rowCount = sorderMapper.insert(sorder);
+        if (rowCount > 0) {
+            ServerResponse .createBySuccess("订单创建成功!");
+        }
+        return null;
+    }
 }

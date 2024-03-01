@@ -26,10 +26,14 @@
         data : formData,
         dataType : 'json',
         success : function (response) {
-          const html_st = "<input class='btn' type='button' id='history' onclick='searchOrder()' value='1. 查询消费历史'>\n" +
-                  "<input class='btn'  type='button' id='cards' onclick='searchCard()' value='2. 查询会员卡余额'>"
-          alert("登录成功！")
-          document.getElementById("login-container").innerHTML = html_st
+          if (response['status'] === 0) {
+            alert("登录成功")
+            const html_st = "<input class='btn' type='button' id='history' onclick='searchOrder()' value='1. 查询消费历史'>\n" +
+                    "<input class='btn'  type='button' id='cards' onclick='searchCard()' value='2. 查询会员卡余额'>"
+            document.getElementById("login-container").innerHTML = html_st
+          } else {
+            alert(response['msg'])
+          }
         },
         error : function (xhr, status, error) {
           alert(error)

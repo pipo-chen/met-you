@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ISOrderService {
     ServerResponse<List<SuperviseOrderVO>> searchOrderRecord(Integer userId, Integer cardId, Integer payway);
+
+    ServerResponse recharge(Sorder sorder);
 }
