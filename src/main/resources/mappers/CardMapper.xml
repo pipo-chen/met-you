@@ -103,4 +103,25 @@
       and status = #{status}
     </if>
   </select>
+
+  <select id="searchCardByIdOrWechat" parameterType="map" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM card
+    WHERE user_id = #{userId}
+       <if test="wechat != null">
+        or wechat = #{wechat}
+       </if>
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+        from card
+    where id = #{id}
+  </select>
+
+  <update id="updateBalance" parameterType="com.metyou.pojo.Card">
+    update card
+    set balance = #{balance}
+    where id = #{id}
+  </update>
 </mapper>

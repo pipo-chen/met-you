@@ -146,4 +146,8 @@
         set main_image = #{mainImage}
         where id = #{id}
     </update>
+    <select id="selectByUsername" parameterType="string" resultType="int">
+        select id from mmall_staff
+        where username = #{username}
+    </select>
 </mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.metyou.dao.CardRecordMapper">
+  <resultMap id="BaseResultMap" type="com.metyou.pojo.CardRecord">
+    <constructor>
+      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="card_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="money" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="operator" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="creator" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="creator_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="note" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.metyou.pojo.CardRecord">
+    insert into card_record (id, card_id, money, 
+      operator, create_time, creator, 
+      creator_id, note)
+    values (#{id,jdbcType=INTEGER}, #{cardId,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, 
+      #{operator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, 
+      #{creatorId,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.metyou.pojo.CardRecord">
+    insert into card_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardId != null">
+        card_id,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+        create_time,
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="creatorId != null">
+        creator_id,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      now(),
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

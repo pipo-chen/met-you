@@ -1,17 +1,14 @@
 package com.metyou.service.impl;
 
 import com.metyou.common.ServerResponse;
-import com.metyou.dao.ScommodityMapper;
-import com.metyou.dao.SorderMapper;
-import com.metyou.dao.StaffMapper;
-import com.metyou.pojo.Scommodity;
-import com.metyou.pojo.Sorder;
-import com.metyou.pojo.Staff;
+import com.metyou.dao.*;
+import com.metyou.pojo.*;
 import com.metyou.service.ISOrderService;
 import com.metyou.vo.SuperviseOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +22,12 @@ public class SOrderServiceImpl implements ISOrderService {
 
     @Autowired
     private ScommodityMapper scommodityMapper;
+
+    @Autowired
+    private CardMapper cardMapper;
+
+    @Autowired
+    private CardRecordMapper cardRecordMapper;
 
     @Override
     public ServerResponse<List<SuperviseOrderVO>> searchOrderRecord(Integer userId, Integer cardId, Integer payway) {
@@ -69,16 +72,52 @@ public class SOrderServiceImpl implements ISOrderService {
     }
 
     @Override
-    public ServerResponse recharge(Sorder sorder) {
-        //开始增加订单
+    public ServerResponse consume(Sorder sorder, CardRecord record) {
+    //userId, commodityId, supervisId, supervisName, salePrice, payway, cardId, note
+        //根据传入的commodityId 查询当前商品的销售价格
+        Scommodity scommodity = scommodityMapper.selectByPrimaryKey(sorder.getCommodityId());
+        sorder.setOriginPrice(scommodity.getPrcie());
+
+        //输入监督员姓名之后，id就不用手动输入了,通过名字查id
+        String names = sorder.getSupervisName();
+        String[] namelist = names.split("\\+");
+        int staff_id = staffMapper.selectByUsername(namelist[0]);
+        if (staff_id < 0) {
+            return ServerResponse.createByErrorMessage("监督员不存在!");
+        }
+        sorder.setSupervisId(staff_id);
+
+        //设置余额
         if (sorder.getPayway() == 4 ) {
-            if (sorder.getBalance().floatValue() < 1 || sorder.getBalance().floatValue() - sorder.getSalePrice().floatValue() < 1)
+            //新增一条到cardrecord 表中
+            int rowCount = cardRecordMapper.insertSelective(record);
+            record.setNote("消费时系统自动创建");
+
+            if (rowCount <= 0) {
+                return ServerResponse.createByErrorMessage("新增会员消费项失败!");
+            }
+            Card card = cardMapper.selectByPrimaryKey(sorder.getCardId());
+            //现有的余额都从卡里面取出
+            if (card.getBalance().floatValue() < 1 || card.getBalance().floatValue() - sorder.getSalePrice().floatValue() < 1)
                 return ServerResponse.createByErrorMessage("余额不足!");
+            else {
+                BigDecimal balance = card.getBalance().subtract(sorder.getSalePrice());
+                sorder.setBalance(balance);
+                //同样，那张卡也需要进行余额扣除的变更
+                card.setBalance(balance);
+                rowCount = cardMapper.updateBalance(card);
+                if (rowCount <= 0) {
+                    return ServerResponse.createBySuccess("余额变更失败!");
+                }
+            }
         }
-        int rowCount = sorderMapper.insert(sorder);
+        //新建订单都是待开始状态
+        sorder.setStatus(1);
+        //开始插入新订单
+        int rowCount = sorderMapper.insertSelective(sorder);
         if (rowCount > 0) {
-            ServerResponse .createBySuccess("订单创建成功!");
+            return ServerResponse.createBySuccess("订单创建成功!");
         }
-        return null;
+        return ServerResponse.createByErrorMessage("订单创建失败!");
     }
 }

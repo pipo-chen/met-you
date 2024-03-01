@@ -10,12 +10,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db12167e-df53-424c-a021-a8c453451319" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/SOrderManagerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/CardManagerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/dao/CardRecordMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/CardRecord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/CardRecordMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/SOrderManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/SOrderManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/dao/BalanceRecordMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/dao/CardMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/dao/CardMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/dao/StaffMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/dao/StaffMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/BalanceRecord.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/Sorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/Sorder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/ICardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/ICardService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/ISOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/ISOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/CardServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/CardServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/SOrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/SOrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/BalanceRecordMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/CardMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/CardMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/SorderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/SorderMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/StaffMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/StaffMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -273,7 +287,7 @@
       <workItem from="1708552702821" duration="903000" />
       <workItem from="1708609501016" duration="32000" />
       <workItem from="1708677132389" duration="6369000" />
-      <workItem from="1709085155987" duration="15200000" />
+      <workItem from="1709085155987" duration="24570000" />
     </task>
     <servers />
   </component>

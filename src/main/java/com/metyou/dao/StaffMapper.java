@@ -22,4 +22,6 @@ public interface StaffMapper {
     int updateStatus(@Param("id") Integer id, @Param("status") Integer status);
 
     int updateImage(@Param("id") Integer id, @Param("mainImage") String mainImage);
+
+    int selectByUsername(@Param("username") String username);
 }

@@ -34,6 +34,17 @@ public class Sorder {
 
     private Date createTime;
 
+    public Sorder(Integer userId, Integer commodityId, String supervisName, BigDecimal salePrice, Integer payway, Integer cardId, String note) {
+        this.userId = userId;
+        this.commodityId = commodityId;
+        this.supervisName = supervisName;
+        this.salePrice = salePrice;
+        this.payway = payway;
+        this.cardId = cardId;
+        this.note = note;
+    }
+
+
     public Date getCreateTime() {
         return createTime;
     }

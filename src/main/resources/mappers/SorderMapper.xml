@@ -80,9 +80,7 @@
       <if test="note != null">
         note,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -127,6 +125,7 @@
       <if test="note != null">
         #{note,jdbcType=VARCHAR},
       </if>
+      now(),
     </trim>
   </insert>
   <select id="searchSorder" parameterType="map" resultMap="BaseResultMap">

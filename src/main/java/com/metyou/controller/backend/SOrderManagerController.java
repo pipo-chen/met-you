@@ -3,19 +3,18 @@ package com.metyou.controller.backend;
 import com.metyou.common.Const;
 import com.metyou.common.ResponseCode;
 import com.metyou.common.ServerResponse;
+import com.metyou.pojo.CardRecord;
 import com.metyou.pojo.Sorder;
 import com.metyou.pojo.User;
 import com.metyou.service.ISOrderService;
 import com.metyou.service.IUserService;
-import com.metyou.vo.SuperviseOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("/manage/sorder")
@@ -27,15 +26,22 @@ public class SOrderManagerController {
     @Autowired
     private IUserService iUserService;
 
-    @RequestMapping("recharge")
+    @RequestMapping("consume")
     @ResponseBody
-    public ServerResponse recharge(HttpSession session, Sorder sorder) {
+    public ServerResponse consume(HttpSession session, Integer userId, Integer commodityId, String supervisName, BigDecimal salePrice, Integer payway, Integer cardId, String note) {
+        Sorder sorder = new Sorder(userId, commodityId, supervisName, salePrice, payway, cardId, note);
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登录");
         }
         if (iUserService.checkAdminRole(user).isSuccess()) {
-            return isOrderService.recharge(sorder);
+            CardRecord record = new CardRecord();
+            record.setCreator(user.getUsername());
+            record.setCreatorId(user.getId());
+            record.setMoney(salePrice);
+            record.setCardId(cardId);
+            record.setOperator("sub");
+            return isOrderService.consume(sorder, record);
         } else {
             return ServerResponse.createByErrorMessage("无权限操作");
         }

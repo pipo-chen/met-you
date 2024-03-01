@@ -10,5 +10,11 @@ public interface CardMapper {
 
     int insertSelective(Card record);
 
+    Card selectByPrimaryKey(Integer id);
+
     List<Card>searchCard(@Param("userId") Integer userId, @Param("status") Integer status);
+
+    List<Card>searchCardByIdOrWechat(@Param("userId") Integer userId, @Param("status") Integer status, @Param("wechat") String wechat);
+
+    int updateBalance(Card record);
 }
