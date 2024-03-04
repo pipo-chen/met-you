@@ -1,5 +1,6 @@
 package com.metyou.pojo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Staff {
@@ -20,6 +21,8 @@ public class Staff {
     private Integer role;
 
     private Integer status;
+
+    private BigDecimal balance;
 
     private String detail;
 
@@ -65,7 +68,7 @@ public class Staff {
         this.belong = belong;
     }
 
-    public Staff(Integer id, String username, Integer age, String wechat, Integer belong, String email, String phone, Integer role, Integer status, String detail, String slogan, String mainImage, String gender, Date createTime, Date updateTime) {
+    public Staff(Integer id, String username, Integer age, String wechat, Integer belong, String email, String phone, Integer role, Integer status, BigDecimal balance, String detail, String slogan, String mainImage, String gender, Date createTime, Date updateTime) {
         this.id = id;
         this.username = username;
         this.age = age;
@@ -75,6 +78,7 @@ public class Staff {
         this.phone = phone;
         this.role = role;
         this.status = status;
+        this.balance = balance;
         this.detail = detail;
         this.slogan = slogan;
         this.mainImage = mainImage;
@@ -169,5 +173,13 @@ public class Staff {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 }
