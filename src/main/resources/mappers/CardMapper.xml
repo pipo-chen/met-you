@@ -19,13 +19,13 @@
     id, user_id, wechat, username, level, status, service,balance,create_time,note
   </sql>
   <insert id="insert" parameterType="com.metyou.pojo.Card">
-    insert into card (id, user_id, wechat, 
+    insert into card (id, user_id, wechat,
       username, level, status, 
       service, balance, create_time, 
       note)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{wechat,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{wechat,jdbcType=VARCHAR},
       #{username,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{service,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{service,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL}, now(),
       #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.metyou.pojo.Card">
@@ -55,9 +55,7 @@
       <if test="balance != null">
         balance,
       </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
+      create_time,
       <if test="note != null">
         note,
       </if>
@@ -87,9 +85,7 @@
       <if test="balance != null">
         #{balance,jdbcType=DECIMAL},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
+      now(),
       <if test="note != null">
         #{note,jdbcType=VARCHAR},
       </if>

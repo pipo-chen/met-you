@@ -8,7 +8,15 @@ public class Sorder {
 
     private Integer userId;
 
+    private String username;
+
+    private String wechat;
+
+    private BigDecimal commission;
+
     private Integer commodityId;
+
+    private Integer commodityNum;
 
     private Integer supervisId;
 
@@ -34,7 +42,7 @@ public class Sorder {
 
     private Date createTime;
 
-    public Sorder(Integer userId, Integer commodityId, String supervisName, BigDecimal salePrice, Integer payway, Integer cardId, String note) {
+    public Sorder(Integer userId, Integer commodityId,Integer commodityNum, String supervisName, BigDecimal salePrice, Integer payway, Integer cardId, String note) {
         this.userId = userId;
         this.commodityId = commodityId;
         this.supervisName = supervisName;
@@ -42,8 +50,16 @@ public class Sorder {
         this.payway = payway;
         this.cardId = cardId;
         this.note = note;
+        this.commodityNum = commodityNum;
     }
 
+    public Integer getCommodityNum() {
+        return commodityNum;
+    }
+
+    public void setCommodityNum(Integer commodityNum) {
+        this.commodityNum = commodityNum;
+    }
 
     public Date getCreateTime() {
         return createTime;
@@ -53,10 +69,14 @@ public class Sorder {
         this.createTime = createTime;
     }
 
-    public Sorder(Integer id, Integer userId, Integer commodityId, Integer supervisId, String supervisName, BigDecimal salePrice, BigDecimal originPrice, Integer payway, Integer status, BigDecimal balance, Integer cardId, Date beginTime, Date endTime, String note, Date createTime) {
+    public Sorder(Integer id, Integer userId, String username, String wechat, BigDecimal commission, Integer commodityId, Integer commodityNum, Integer supervisId, String supervisName, BigDecimal salePrice, BigDecimal originPrice, Integer payway, Integer status, BigDecimal balance, Integer cardId, Date beginTime, Date endTime, String note, Date createTime) {
         this.id = id;
         this.userId = userId;
+        this.username = username;
+        this.wechat = wechat;
+        this.commission = commission;
         this.commodityId = commodityId;
+        this.commodityNum = commodityNum;
         this.supervisId = supervisId;
         this.supervisName = supervisName;
         this.salePrice = salePrice;
@@ -69,6 +89,30 @@ public class Sorder {
         this.endTime = endTime;
         this.note = note;
         this.createTime = createTime;
+    }
+
+    public BigDecimal getCommission() {
+        return commission;
+    }
+
+    public void setCommission(BigDecimal commission) {
+        this.commission = commission;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
     }
 
     public BigDecimal getBalance() {

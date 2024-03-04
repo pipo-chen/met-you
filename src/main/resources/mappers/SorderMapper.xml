@@ -5,7 +5,11 @@
     <constructor>
       <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="wechat" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="commission" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
       <arg column="commodity_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="commodity_num" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="supervis_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="supervis_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="sale_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
@@ -21,16 +25,16 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, commodity_id, supervis_id, supervis_name, sale_price, origin_price,payway,status,balance, card_id,begin_time,end_time,note,create_time
+    id, user_id, username, wechat,commission, commodity_id, commodity_num, supervis_id, supervis_name, sale_price, origin_price,payway,status,balance, card_id,begin_time,end_time,note,create_time
   </sql>
   <insert id="insert" parameterType="com.metyou.pojo.Sorder">
-    insert into sorder (id, user_id, commodity_id, 
+    insert into sorder (id, user_id,username,wechat, commission, ommodity_id, commodity_num,
       supervis_id, supervis_name, sale_price, 
       origin_price, payway, status, balance,
       card_id, begin_time, end_time, 
       note,create_time)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{commodityId,jdbcType=INTEGER}, 
-      #{supervisId,jdbcType=INTEGER}, #{supervisName,jdbcType=VARCHAR}, #{salePrice,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},#{username,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{commission,jdbcType=DECIMAL }, #{commodityId,jdbcType=INTEGER}, #{commodityNum,jdbcType=INTEGER},
+            #{supervisId,jdbcType=INTEGER}, #{supervisName,jdbcType=VARCHAR}, #{salePrice,jdbcType=DECIMAL},
       #{originPrice,jdbcType=DECIMAL}, #{payway,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},  #{balance,jdbcType=DECIMAL},
             #{cardId,jdbcType=INTEGER}, #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
       #{note,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
@@ -44,8 +48,20 @@
       <if test="userId != null">
         user_id,
       </if>
+        <if test="username != null">
+          username,
+        </if>
+        <if test="wechat != null">
+          wechat,
+        </if>
+        <if test="commission != null">
+          commission,
+        </if>
       <if test="commodityId != null">
         commodity_id,
+      </if>
+      <if test="commodityNum != null">
+        commodity_num,
       </if>
       <if test="supervisId != null">
         supervis_id,
@@ -89,8 +105,20 @@
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
+        <if test="username !=null">
+          #{username,jdbcType=VARCHAR},
+        </if>
+        <if test="wechat != null">
+          #{wechat,jdbcType=VARCHAR},
+        </if>
+        <if test="commission != null">
+          #{commission. jdbcType=DECIMAL},
+        </if>
       <if test="commodityId != null">
         #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityNum != null">
+        #{commodityNum,jdbcType=INTEGER},
       </if>
       <if test="supervisId != null">
         #{supervisId,jdbcType=INTEGER},
@@ -140,5 +168,11 @@
       and payway = #{payway}
     </if>
     ORDER BY create_time DESC
+  </select>
+  <select id="search" parameterType="string" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List"/>
+        from sorder
+        where supervis_name Like #{supervisName}
   </select>
 </mapper>

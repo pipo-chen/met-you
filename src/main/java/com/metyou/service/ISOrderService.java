@@ -10,5 +10,7 @@ import java.util.List;
 public interface ISOrderService {
     ServerResponse<List<SuperviseOrderVO>> searchOrderRecord(Integer userId, Integer cardId, Integer payway);
 
-    ServerResponse consume(Sorder sorder, CardRecord record);
+    ServerResponse<String> consume(Sorder sorder, CardRecord record);
+
+    ServerResponse<List<SuperviseOrderVO>> search(String supervisName);
 }

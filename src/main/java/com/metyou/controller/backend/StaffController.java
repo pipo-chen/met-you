@@ -52,7 +52,7 @@ public class StaffController {
                                          @RequestParam(value = "role", required = false) Integer role,
                                          @RequestParam(value = "status", required = false) Integer status,
                                          @RequestParam(value = "belong", defaultValue = "1") Integer belong,
-                                         @RequestParam(value = "username",required = false) String username,
+                                         @RequestParam(value = "username",defaultValue = "") String username,
                                          @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                          @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         return iStaffService.getStaffList(staffId, role, status, pageNum, pageSize,username,belong);

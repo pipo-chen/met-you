@@ -29,6 +29,9 @@ public class SOrderServiceImpl implements ISOrderService {
     @Autowired
     private CardRecordMapper cardRecordMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
     public ServerResponse<List<SuperviseOrderVO>> searchOrderRecord(Integer userId, Integer cardId, Integer payway) {
         List<Sorder> sorders = sorderMapper.searchSorder(userId, cardId,payway);
@@ -55,6 +58,7 @@ public class SOrderServiceImpl implements ISOrderService {
             superviseOrderVO.setBeginTime(order.getBeginTime());
             superviseOrderVO.setSupervisId(order.getSupervisId());
             superviseOrderVO.setStaffImg(staff.getMainImage());
+            superviseOrderVO.setCommodityNum(order.getCommodityNum());
             //获取监督员姓名
             superviseOrderVO.setStaffName(staff.getUsername());
             superviseOrderVO.setSupervisName(staff.getUsername());
@@ -71,12 +75,69 @@ public class SOrderServiceImpl implements ISOrderService {
         return ServerResponse.createBySuccess(data);
     }
 
+    /**
+     * 后台，根据监督员查询订单及佣金、开始时间、结束时间
+     * @param supervisName
+     * @return
+     */
     @Override
-    public ServerResponse consume(Sorder sorder, CardRecord record) {
-    //userId, commodityId, supervisId, supervisName, salePrice, payway, cardId, note
+    public ServerResponse<List<SuperviseOrderVO>> search(String supervisName) {
+        supervisName = new StringBuilder().append("%").append(supervisName).append("%").toString();
+        List<Sorder> sorders = sorderMapper.search(supervisName);
+        //通过sorders中的对象，挨个查询数据库中的监督员信息和商品信息
+        List<SuperviseOrderVO>data = new ArrayList<>();
+
+        for (Sorder order : sorders) {
+            SuperviseOrderVO superviseOrderVO = new SuperviseOrderVO();
+            Staff staff = staffMapper.selectByPrimaryKey(order.getSupervisId());
+            Scommodity scommodity =  scommodityMapper.selectByPrimaryKey(order.getCommodityId());
+
+            superviseOrderVO.setBalance(order.getBalance());
+            superviseOrderVO.setCardId(order.getCardId());
+            //产品定价.直接从商品中拿
+            superviseOrderVO.setOriginPrice(scommodity.getPrcie());
+            superviseOrderVO.setSalePrice(order.getSalePrice());
+            //订单号
+            superviseOrderVO.setId(order.getId());
+            superviseOrderVO.setNote(order.getNote());
+            superviseOrderVO.setPayway(order.getPayway());
+            superviseOrderVO.setStatus(order.getStatus());
+            superviseOrderVO.setBeginTime(order.getBeginTime());
+            superviseOrderVO.setEndTime(order.getEndTime());
+            superviseOrderVO.setBeginTime(order.getBeginTime());
+            superviseOrderVO.setSupervisId(order.getSupervisId());
+            superviseOrderVO.setStaffImg(staff.getMainImage());
+            superviseOrderVO.setCommodityNum(order.getCommodityNum());
+            superviseOrderVO.setCommission(order.getCommission());
+
+            //获取监督员姓名
+            superviseOrderVO.setStaffName(staff.getUsername());
+            superviseOrderVO.setSupervisName(staff.getUsername());
+            superviseOrderVO.setUserId(order.getUserId());
+
+            superviseOrderVO.setCommodityId(order.getCommodityId());
+            superviseOrderVO.setCommodityName(scommodity.getName());
+            superviseOrderVO.setCreateTime(order.getCreateTime());
+            data.add(superviseOrderVO);
+        }
+        if (sorders.isEmpty()) {
+            return ServerResponse.createByErrorMessage("没有查到相关服务记录");
+        }
+        return ServerResponse.createBySuccess(data);
+
+    }
+
+    @Override
+    public ServerResponse<String> consume(Sorder sorder, CardRecord record) {
+        //userId, commodityId, supervisId, supervisName, salePrice, payway, cardId, note
         //根据传入的commodityId 查询当前商品的销售价格
         Scommodity scommodity = scommodityMapper.selectByPrimaryKey(sorder.getCommodityId());
         sorder.setOriginPrice(scommodity.getPrcie());
+
+        //根据传入的userId填写购买时用户名和wechat
+        User user = userMapper.selectByPrimaryKey(sorder.getUserId());
+        sorder.setUsername(user.getUsername());
+        sorder.setWechat(user.getWechat());
 
         //输入监督员姓名之后，id就不用手动输入了,通过名字查id
         String names = sorder.getSupervisName();

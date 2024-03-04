@@ -114,11 +114,12 @@
             update_time = now()
         where id = #{id,jdbcType=INTEGER}
     </update>
+
     <select id="selectByIdorRoleOrStatus" resultMap="BaseResultMap" parameterType="map">
         select
             <include refid="Base_Column_List"/>
         from mmall_staff
-        where 1 = 1
+        where belong=#{belong}
             <if test="id != null">
                 and id = #{id}
             </if>
@@ -131,11 +132,9 @@
         <if test="username != null" >
             and username like #{username}
         </if>
-        <if test="belong != null" >
-            and belong = #{belong}
-        </if>
         ORDER BY status asc
     </select>
+
     <update id="updateStatus" parameterType="map">
         update mmall_staff
         set status = #{status}

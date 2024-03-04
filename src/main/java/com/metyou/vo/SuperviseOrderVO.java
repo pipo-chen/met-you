@@ -10,6 +10,8 @@ public class SuperviseOrderVO {
 
     private Integer commodityId;
 
+    private Integer commodityNum;
+
     private Integer supervisId;
 
     private String supervisName;
@@ -56,6 +58,8 @@ public class SuperviseOrderVO {
     private String staffName;
 
     private String staffImg;
+
+    private BigDecimal commission;
 
     //商品相关
     private String commodityName;
@@ -194,5 +198,21 @@ public class SuperviseOrderVO {
 
     public void setCommodityName(String commodityName) {
         this.commodityName = commodityName;
+    }
+
+    public Integer getCommodityNum() {
+        return commodityNum;
+    }
+
+    public void setCommodityNum(Integer commodityNum) {
+        this.commodityNum = commodityNum;
+    }
+
+    public BigDecimal getCommission() {
+        return commission;
+    }
+
+    public void setCommission(BigDecimal commission) {
+        this.commission = commission;
     }
 }

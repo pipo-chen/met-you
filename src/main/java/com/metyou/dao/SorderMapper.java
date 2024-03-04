@@ -11,4 +11,6 @@ public interface SorderMapper {
     int insertSelective(Sorder record);
 
     List<Sorder> searchSorder(@Param("userId") Integer userId, @Param("cardId") Integer cardId, @Param("payway") Integer payway);
+
+    List<Sorder> search(@Param("supervisName") String supervisName);
 }

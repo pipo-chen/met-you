@@ -51,6 +51,10 @@ public class UserServiceImpl implements IUserService {
         if (!validResponse.isSuccess()) {
             return validResponse;
         }
+        validResponse = this.checkValid(user.getWechat(), Const.WECHAT);
+        if (!validResponse.isSuccess()) {
+            return validResponse;
+        }
 
         //默认角色是学员
         user.setRole(Const.Role.ROLE_CUSTOMER);
@@ -79,6 +83,14 @@ public class UserServiceImpl implements IUserService {
                 if (resultCount > 0) {
                     return ServerResponse.createByErrorMessage("邮箱已存在");
                 }
+            }
+            //todo 还需要check一下wechat
+            if (Const.WECHAT.equals(type)) {
+                int resultCount = userMapper.checkWechat(str);
+                if (resultCount > 0) {
+                    return ServerResponse.createByErrorMessage("微信号已存在");
+                }
+
             }
         } else {
             return ServerResponse.createByErrorMessage("参数错误");
@@ -154,7 +166,6 @@ public class UserServiceImpl implements IUserService {
         if (updateCount > 0) {
             return ServerResponse.createBySuccessMessage("密码更新成功");
         }
-
         return ServerResponse.createByErrorMessage("密码更新失败");
     }
 
@@ -231,5 +242,24 @@ public class UserServiceImpl implements IUserService {
         PageInfo pageResult = new PageInfo(members);
         pageResult.setList(members);
         return ServerResponse.createBySuccess(pageResult);
+    }
+
+    /**
+     * 后台帮助用户重置密码
+     * @param passwordOld
+     * @param passwordNew
+     * @param userId
+     * @return
+     */
+    @Override
+    public ServerResponse<String> resetUserPassword(String passwordNew, Integer userId) {
+        //获取user
+        User user = userMapper.selectByPrimaryKey(userId);
+        user.setPassword(MD5Util.MD5EncodeUtf8(passwordNew));
+        int updateCount = userMapper.updateByPrimaryKeySelective(user);
+        if (updateCount > 0) {
+            return ServerResponse.createBySuccessMessage("用户密码更新成功");
+        }
+        return ServerResponse.createByErrorMessage("密码更新失败");
     }
 }

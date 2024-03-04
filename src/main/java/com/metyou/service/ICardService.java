@@ -14,4 +14,6 @@ public interface ICardService {
     ServerResponse<List<Card>> searchUserCardsByIdOrWechat(Integer userId, Integer status, String wechat);
 
     ServerResponse recharge(CardRecord cardRecord);
+
+    ServerResponse createCard(Card card);
 }

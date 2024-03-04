@@ -66,4 +66,18 @@ public class UserManagerController {
         }
     }
 
+    @RequestMapping(value = "reset_user_password", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse<String> resetUserPassword(HttpSession session, Integer userId, String passwordNew) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登录");
+        }
+        if (iUserService.checkAdminRole(user).isSuccess()) {
+            return iUserService.resetUserPassword(passwordNew, userId);
+        } else {
+            return ServerResponse.createByErrorMessage("无权限操作");
+        }
+    }
+
 }

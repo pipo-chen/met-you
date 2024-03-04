@@ -8,4 +8,6 @@ public interface ScommodityMapper {
     int insertSelective(Scommodity record);
 
     Scommodity selectByPrimaryKey(Integer id);
+
+
 }

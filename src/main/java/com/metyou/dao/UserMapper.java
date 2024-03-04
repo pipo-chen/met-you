@@ -22,6 +22,8 @@ public interface UserMapper {
 
     int checkEmail(String email);
 
+    int checkWechat(String wechat);
+
     User selectLogin(@Param("username") String username, @Param("password")String password);
 
     String selectQuestionByUsername(String username);

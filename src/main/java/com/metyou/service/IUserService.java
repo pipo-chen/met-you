@@ -28,4 +28,6 @@ public interface IUserService {
     ServerResponse<User> getUserInfoById(Integer userId);
 
     ServerResponse<PageInfo> getMemberList(int pageNum, int pageSize, String wechat);
+
+    ServerResponse<String> resetUserPassword(String passwordNew, Integer userId);
 }
