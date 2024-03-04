@@ -112,7 +112,7 @@
           #{wechat,jdbcType=VARCHAR},
         </if>
         <if test="commission != null">
-          #{commission. jdbcType=DECIMAL},
+          #{commission, jdbcType=DECIMAL},
         </if>
       <if test="commodityId != null">
         #{commodityId,jdbcType=INTEGER},
@@ -174,5 +174,20 @@
         <include refid="Base_Column_List"/>
         from sorder
         where supervis_name Like #{supervisName}
+       <if test="status != -1">
+        and status = #{status}
+       </if>
+    order by status asc
+  </select>
+  
+  <update id="updateStatus" parameterType="map">
+    update sorder set status = #{status}, begin_time=#{beginTime}, end_time=#{endTime} where id = #{id}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List"/>
+        from sorder
+        where id = #{id}
   </select>
 </mapper>

@@ -29,6 +29,15 @@ public class Const {
         int ROLE_ADMIN = 1; //管理员
     }
 
+    public interface OrderStatus {
+        int ORDER_STATUS_NEED_BEGIN = 1;
+        int ORDER_STATUS_ACTIVE = 2;
+        int ORDER_STATUS_FINISHED = 3;
+        int ORDER_STATUS_PAYED = 4;
+        //订单取消
+        int ORDER_STATUS_CANCLE = 5;
+    }
+
     public enum ProductStatusEnum {
         ON_SALE(1, "在线");
 

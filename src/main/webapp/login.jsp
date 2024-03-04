@@ -103,7 +103,7 @@
   function render(list) {
     let html_st = ""
     for (const item of list) {
-      // 1. 未开始；2.进行中；3.已结束 4. 关闭
+      //用户： 1. 未开始；2.进行中；3.已结束 4. 关闭
       const status = item['status'] === 1 ? "未开始" : (item['status'] === 2 ? "进行中" : (item['status'] === 3 ? "已结束" : "关闭"))
       const payway = item['payway'] === 4 ? "会员卡" : (item['payway'] === 3 ? "微信" : (item['payway'] === 2 ? "淘宝" : "支付宝"))
       const date = new Date(item['createTime'])

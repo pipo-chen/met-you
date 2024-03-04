@@ -155,4 +155,9 @@
         select id from mmall_staff
         where username = #{username}
     </select>
+    <update id="updateBalance" parameterType="map">
+        update mmall_staff
+        set balance = #{balance}
+        where id = #{id}
+    </update>
 </mapper>

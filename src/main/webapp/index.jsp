@@ -7,7 +7,6 @@
 <%--    jquery--%>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-
         $(function () {
             $.get("/manage/staff/list", {
                 username : "",
@@ -37,7 +36,7 @@
         }
     </script>
 </head>
-<body">
+<body>
 <div class="header">
     <ul class="ul-nav">
         <li class="active"><a href="index.jsp">Ê×Ò³</a></li>

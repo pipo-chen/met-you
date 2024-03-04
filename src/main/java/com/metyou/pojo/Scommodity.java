@@ -10,6 +10,10 @@ public class Scommodity {
 
     private String descr;
 
+    private BigDecimal commission;
+
+    private BigDecimal oldbuy;
+
     private String detail;
 
     private String headimg;
@@ -22,16 +26,34 @@ public class Scommodity {
 
     private String note;
 
-    public Scommodity(Integer id, String name, String descr, String detail, String headimg, BigDecimal prcie, Integer status, Date createTime, String note) {
+    public Scommodity(Integer id, String name, String descr, BigDecimal commission, BigDecimal oldbuy, String detail, String headimg, BigDecimal prcie, Integer status, Date createTime, String note) {
         this.id = id;
         this.name = name;
         this.descr = descr;
+        this.commission = commission;
+        this.oldbuy = oldbuy;
         this.detail = detail;
         this.headimg = headimg;
         this.prcie = prcie;
         this.status = status;
         this.createTime = createTime;
         this.note = note;
+    }
+
+    public BigDecimal getCommission() {
+        return commission;
+    }
+
+    public void setCommission(BigDecimal commission) {
+        this.commission = commission;
+    }
+
+    public BigDecimal getOldbuy() {
+        return oldbuy;
+    }
+
+    public void setOldbuy(BigDecimal oldbuy) {
+        this.oldbuy = oldbuy;
     }
 
     public Scommodity() {

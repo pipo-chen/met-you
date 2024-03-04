@@ -3,6 +3,7 @@ package com.metyou.dao;
 import com.metyou.pojo.Staff;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface StaffMapper {
@@ -24,4 +25,7 @@ public interface StaffMapper {
     int updateImage(@Param("id") Integer id, @Param("mainImage") String mainImage);
 
     int selectByUsername(@Param("username") String username);
+
+    int updateBalance(@Param("id") Integer id, @Param("balance") BigDecimal balance);
+
 }

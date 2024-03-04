@@ -4,6 +4,7 @@ import com.metyou.common.Const;
 import com.metyou.common.ResponseCode;
 import com.metyou.common.ServerResponse;
 import com.metyou.pojo.CardRecord;
+import com.metyou.pojo.CommissionRecord;
 import com.metyou.pojo.Sorder;
 import com.metyou.pojo.User;
 import com.metyou.service.ISOrderService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -31,7 +33,7 @@ public class SOrderManagerController {
 
     @RequestMapping("consume")
     @ResponseBody
-    public ServerResponse<String> consume(HttpSession session, Integer userId, Integer commodityId, Integer commodityNum, String supervisName, BigDecimal salePrice, Integer payway, Integer cardId, String note) {
+    public ServerResponse<String> consume(HttpSession session, Integer userId, Integer commodityId, Integer commodityNum, String supervisName, BigDecimal salePrice, Integer payway, Integer cardId, String note,  @RequestParam(value = "isOld", defaultValue = "false") boolean isOld) {
         Sorder sorder = new Sorder(userId, commodityId, commodityNum, supervisName, salePrice, payway, cardId, note);
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
@@ -44,7 +46,7 @@ public class SOrderManagerController {
             record.setMoney(salePrice);
             record.setCardId(cardId);
             record.setOperator("sub");
-            return isOrderService.consume(sorder, record);
+            return isOrderService.consume(sorder, record, isOld);
         } else {
             return ServerResponse.createByErrorMessage("无权限操作");
         }
@@ -55,9 +57,10 @@ public class SOrderManagerController {
      * @param session
      * @return
      */
+
     @RequestMapping("search")
     @ResponseBody
-    public ServerResponse<List<SuperviseOrderVO>> searchOrders(HttpSession session) {
+    public ServerResponse<List<SuperviseOrderVO>> searchOrders(HttpSession session, @RequestParam(value = "status", defaultValue = "-1") int status ) {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登录");
@@ -65,8 +68,36 @@ public class SOrderManagerController {
         //校验一下是否是管理员
         if (iUserService.checkAdminRole(user).isSuccess()) {
             //增加处理分类的逻辑
-            return isOrderService.search(user.getUsername());
+            return isOrderService.search(user.getUsername(), status);
 
+        } else {
+            return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
+        }
+    }
+
+    /**
+     *  修改后台数据库中的状态，同时，佣金也会做相应的增加或者减少
+     * @param session
+     * @param order_id
+     * @param status
+     * @param beginTime
+     * @param endTime
+     * @return
+     */
+    @RequestMapping("change_status")
+    @ResponseBody
+    public ServerResponse<String> changeStatus(HttpSession session, Integer order_id, Integer status, Date beginTime, Date endTime) {
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登录");
+        }
+        if (iUserService.checkAdminRole(user).isSuccess()) {
+            CommissionRecord record = new CommissionRecord();
+            record.setOrderId(order_id);
+            record.setCreator(user.getUsername());
+            record.setCreatorId(user.getId());
+
+            return isOrderService.changeStatus(order_id, status, beginTime, endTime, record);
         } else {
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }

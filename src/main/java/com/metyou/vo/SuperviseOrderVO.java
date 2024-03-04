@@ -8,6 +8,10 @@ public class SuperviseOrderVO {
 
     private Integer userId;
 
+    private String wechat;
+
+    private String username;
+
     private Integer commodityId;
 
     private Integer commodityNum;
@@ -37,6 +41,22 @@ public class SuperviseOrderVO {
     private Date createTime;
 
     private Date createCardTime;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
+    }
 
     public Date getCreateCardTime() {
         return createCardTime;
