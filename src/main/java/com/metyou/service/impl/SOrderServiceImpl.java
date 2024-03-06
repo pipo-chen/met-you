@@ -94,7 +94,7 @@ public class SOrderServiceImpl implements ISOrderService {
 
         for (Sorder order : sorders) {
             //如果改订单已经结算过了，就不要出现再这里了
-            if (order.getStatus() == Const.OrderStatus.ORDER_STATUS_PAYED) {
+            if (status !=Const.OrderStatus.ORDER_STATUS_PAYED && order.getStatus() == Const.OrderStatus.ORDER_STATUS_PAYED) {
                 continue;
             }
             SuperviseOrderVO superviseOrderVO = new SuperviseOrderVO();
