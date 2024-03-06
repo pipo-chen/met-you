@@ -181,7 +181,20 @@
   </select>
   
   <update id="updateStatus" parameterType="map">
-    update sorder set status = #{status}, begin_time=#{beginTime}, end_time=#{endTime} where id = #{id}
+    update sorder
+    <set>
+      <if test="status != null">
+        status = #{status},
+      </if>
+      <if test="beginTime != null">
+        begin_time=#{beginTime},
+      </if>
+      <if test="endTime != null">
+        end_time=#{endTime}
+      </if>
+    </set>
+
+    where id = #{id}
   </update>
 
   <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">

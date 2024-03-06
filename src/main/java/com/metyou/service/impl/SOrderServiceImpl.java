@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -87,54 +88,77 @@ public class SOrderServiceImpl implements ISOrderService {
      */
     @Override
     public ServerResponse<List<SuperviseOrderVO>> search(String supervisName, Integer status) {
+
+        Integer staffId = staffMapper.selectByUsername(supervisName);
         supervisName = new StringBuilder().append("%").append(supervisName).append("%").toString();
+
         List<Sorder> sorders = sorderMapper.search(supervisName, status);
         //通过sorders中的对象，挨个查询数据库中的监督员信息和商品信息
         List<SuperviseOrderVO>data = new ArrayList<>();
 
-        for (Sorder order : sorders) {
-            //如果改订单已经结算过了，就不要出现再这里了
-            if (status !=Const.OrderStatus.ORDER_STATUS_PAYED && order.getStatus() == Const.OrderStatus.ORDER_STATUS_PAYED) {
-                continue;
+        //查找已经结算过的单子
+        List<Integer>payedIds = commissionRecordMapper.selectPayedOrderId(staffId, "sub");
+
+        if (status == Const.OrderStatus.ORDER_STATUS_PAYED) {
+            for (Integer payedId : payedIds) {
+                Sorder order = sorderMapper.selectByPrimaryKey(payedId);
+                SuperviseOrderVO superviseOrderVO = sorderGenerateSuperviseOrderVO(order);
+                data.add(superviseOrderVO);
             }
-            SuperviseOrderVO superviseOrderVO = new SuperviseOrderVO();
-            Staff staff = staffMapper.selectByPrimaryKey(order.getSupervisId());
-            Scommodity scommodity =  scommodityMapper.selectByPrimaryKey(order.getCommodityId());
-
-            //设置用户信息
-            superviseOrderVO.setUserId(order.getUserId());
-            superviseOrderVO.setUsername(order.getUsername());
-            superviseOrderVO.setWechat(order.getWechat());
-
-            //销售价格
-            superviseOrderVO.setSalePrice(order.getSalePrice());
-
-            //订单号
-            superviseOrderVO.setId(order.getId());
-            superviseOrderVO.setStatus(order.getStatus());
-            superviseOrderVO.setBeginTime(order.getBeginTime());
-            superviseOrderVO.setEndTime(order.getEndTime());
-            superviseOrderVO.setSupervisId(order.getSupervisId());
-            superviseOrderVO.setStaffImg(staff.getMainImage());
-            superviseOrderVO.setCommodityNum(order.getCommodityNum());
-            superviseOrderVO.setCommission(order.getCommission());
-            superviseOrderVO.setCreateTime(order.getCreateTime());
-
-            //获取监督员姓名
-            superviseOrderVO.setStaffName(staff.getUsername());
-            superviseOrderVO.setSupervisName(order.getSupervisName());
-
-            //设置商品信息
-            superviseOrderVO.setCommodityId(order.getCommodityId());
-            superviseOrderVO.setCommodityName(scommodity.getName());
-
-            data.add(superviseOrderVO);
+        } else {
+            //查找没有结算过的单子，并且排除掉sub里面的,其中就包含可以操作到结算的单子
+            for (Sorder order : sorders) {
+                //如果改订单已经结算过了，就不要出现再这里了
+                if (payedIds.contains(order.getId()))
+                    continue;
+                SuperviseOrderVO superviseOrderVO = sorderGenerateSuperviseOrderVO(order);
+                data.add(superviseOrderVO);
+            }
         }
         if (sorders.isEmpty()) {
             return ServerResponse.createByErrorMessage("没有查到相关服务记录");
         }
         return ServerResponse.createBySuccess(data);
 
+    }
+
+    /**
+     * 监督员视角订单信息
+     * @param order
+     * @return
+     */
+    public SuperviseOrderVO sorderGenerateSuperviseOrderVO(Sorder order) {
+        SuperviseOrderVO superviseOrderVO = new SuperviseOrderVO();
+        Staff staff = staffMapper.selectByPrimaryKey(order.getSupervisId());
+        Scommodity scommodity =  scommodityMapper.selectByPrimaryKey(order.getCommodityId());
+
+        //设置用户信息
+        superviseOrderVO.setUserId(order.getUserId());
+        superviseOrderVO.setUsername(order.getUsername());
+        superviseOrderVO.setWechat(order.getWechat());
+
+        //销售价格
+        superviseOrderVO.setSalePrice(order.getSalePrice());
+
+        //订单号
+        superviseOrderVO.setId(order.getId());
+        superviseOrderVO.setStatus(order.getStatus());
+        superviseOrderVO.setBeginTime(order.getBeginTime());
+        superviseOrderVO.setEndTime(order.getEndTime());
+        superviseOrderVO.setSupervisId(order.getSupervisId());
+        superviseOrderVO.setStaffImg(staff.getMainImage());
+        superviseOrderVO.setCommodityNum(order.getCommodityNum());
+        superviseOrderVO.setCommission(order.getCommission());
+        superviseOrderVO.setCreateTime(order.getCreateTime());
+
+        //获取监督员姓名
+        superviseOrderVO.setStaffName(staff.getUsername());
+        superviseOrderVO.setSupervisName(order.getSupervisName());
+
+        //设置商品信息
+        superviseOrderVO.setCommodityId(order.getCommodityId());
+        superviseOrderVO.setCommodityName(scommodity.getName());
+        return superviseOrderVO;
     }
 
     @Override
@@ -200,7 +224,28 @@ public class SOrderServiceImpl implements ISOrderService {
 
     @Override
     public ServerResponse<String> changeStatus(Integer id, Integer status, Date beginTime, Date endTime, CommissionRecord record) {
+        //如果想设置成payed必须commission_record中的sub和监督员总数差1
+        Integer staffId = staffMapper.selectByUsername(record.getCreator());
+        if (status == Const.OrderStatus.ORDER_STATUS_PAYED) {
+            List<Integer>payedIds = commissionRecordMapper.selectPayedOrderId(staffId, "sub");
+            //增加佣金,佣金额度
+            Sorder sorder = sorderMapper.selectByPrimaryKey(id);
+            //判断有几位监督员
+            String[] superviss = sorder.getSupervisName().split("\\+");
+            if(payedIds.size() != superviss.length - 1) {
+                //说明不能设置成payed
+                status = Const.OrderStatus.ORDER_STATUS_FINISHED;
+                //判断是否需要单独结算？只要看该订单id 有无被该监督员 sub 如果有的话则不能，如果没有则可以继续
+                int rowCount = commissionRecordMapper.selectItemPayed(id, staffId, "sub");
+                if (rowCount == 0) {
+                    //说明可以添加结算
+                    return addPayedRecord(id, record, staffId);
+                }
+            }
+        }
+
         int rowCount = sorderMapper.updateStatus(id, status, beginTime, endTime);
+
         //说明更新成功
         if(rowCount > 0) {
             //并且将结果同步到staff的balance中
@@ -248,32 +293,36 @@ public class SOrderServiceImpl implements ISOrderService {
                 if( row == 0) {
                     return ServerResponse.createByErrorMessage("必须先结束订单，才可以结算");
                 }
-
-                row = commissionRecordMapper.selectByOrderIdAndOperator(id, "sub");
+                //如果此人之前这个订单从未被结算
+                row = commissionRecordMapper.selectItemPayed(id, staffId, "sub");
                 if (row == 0) {
-                    //减少结算佣金，佣金额度变化
-                    Sorder sorder = sorderMapper.selectByPrimaryKey(id);
-                    record.setCommission(sorder.getCommission());
-                    //todo 结算的话结算当前监督员的单子，不要结算订单中列的id
-                    Integer staffId = staffMapper.selectByUsername(record.getCreator());
-                    record.setStaffId(staffId);
-                    record.setStaffName(record.getCreator());
-                    record.setOperator("sub");
-                    rowCount = commissionRecordMapper.insertSelective(record);
-                    if (rowCount <= 0) {
-                        return ServerResponse.createByErrorMessage("佣金减少失败!");
-                    }
-                    //获取员工当前的balance 减去本单 commission 进行更新
-                    Staff staff = staffMapper.selectByPrimaryKey(staffId);
-                    BigDecimal balance = staff.getBalance().subtract(sorder.getCommission());
-                    staff.setBalance(balance);
-                    rowCount = staffMapper.updateBalance(staffId, balance);
-                    if (rowCount <= 0) {
-                        return ServerResponse.createByErrorMessage("佣金减少失败!");
-                    }
+                    return addPayedRecord(id, record, staffId);
                 }
             }
         }
         return ServerResponse.createBySuccessMessage("操作成功！");
     }
+
+    public ServerResponse<String> addPayedRecord(Integer orderId, CommissionRecord record, Integer staffId) {
+        //减少结算佣金，佣金额度变化
+        Sorder sorder = sorderMapper.selectByPrimaryKey(orderId);
+        record.setCommission(sorder.getCommission());
+        record.setStaffId(staffId);
+        record.setStaffName(record.getCreator());
+        record.setOperator("sub");
+        int rowCount = commissionRecordMapper.insertSelective(record);
+        if (rowCount <= 0) {
+            return ServerResponse.createByErrorMessage("佣金减少失败!");
+        }
+        //获取员工当前的balance 减去本单 commission 进行更新
+        Staff staff = staffMapper.selectByPrimaryKey(staffId);
+        BigDecimal balance = staff.getBalance().subtract(sorder.getCommission());
+        staff.setBalance(balance);
+        rowCount = staffMapper.updateBalance(staffId, balance);
+        if (rowCount <= 0) {
+            return ServerResponse.createByErrorMessage("佣金减少失败!");
+        }
+        return ServerResponse.createBySuccessMessage("操作成功！");
+    }
+
 }

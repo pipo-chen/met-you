@@ -86,7 +86,7 @@ public class SOrderManagerController {
      */
     @RequestMapping("change_status")
     @ResponseBody
-    public ServerResponse<String> changeStatus(HttpSession session, Integer order_id, Integer status, Date beginTime, Date endTime) {
+    public ServerResponse<String> changeStatus(HttpSession session, Integer order_id, Integer status, @RequestParam(value = "beginTime", required = false)  Date beginTime,  @RequestParam(value = "endTime", required = false)  Date endTime) {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登录");

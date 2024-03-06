@@ -133,11 +133,11 @@
 <body>
 <div class="header">
   <ul class="ul-nav">
-    <li class="active"><a href="index.jsp">首页</a></li>
+    <li><a href="index.jsp">首页</a></li>
     <li><a href="mainproduct.jsp">监督产品</a></li>
     <li><a href="product.jsp">配套产品</a></li>
     <li><a href="recharge.jsp">会员充值</a></li>
-    <li><a href="login.jsp">会员登录</a></li>
+    <li class="active"><a href="login.jsp">会员登录</a></li>
   </ul>
 </div>
 <div id="response">
