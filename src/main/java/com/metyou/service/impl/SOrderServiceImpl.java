@@ -93,6 +93,10 @@ public class SOrderServiceImpl implements ISOrderService {
         List<SuperviseOrderVO>data = new ArrayList<>();
 
         for (Sorder order : sorders) {
+            //如果改订单已经结算过了，就不要出现再这里了
+            if (order.getStatus() == Const.OrderStatus.ORDER_STATUS_PAYED) {
+                continue;
+            }
             SuperviseOrderVO superviseOrderVO = new SuperviseOrderVO();
             Staff staff = staffMapper.selectByPrimaryKey(order.getSupervisId());
             Scommodity scommodity =  scommodityMapper.selectByPrimaryKey(order.getCommodityId());

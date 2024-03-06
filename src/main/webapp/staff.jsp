@@ -238,6 +238,7 @@
         padding-left: 20px;
         padding-right: 20px;
         margin-top: 5px;
+        color: white;
     }
     .form-group input {
         height: 30px;
