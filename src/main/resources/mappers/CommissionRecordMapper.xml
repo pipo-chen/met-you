@@ -92,4 +92,7 @@
   <select id="selectByOrderIdAndOperator" parameterType="map" resultType="int">
     select count(*) from commission_record where order_id = #{orderId} and operator = #{operator}
   </select>
+  <select id="payedCalculate" parameterType="map" resultType="decimal">
+    select sum(commission) from commission_record where staff_id = #{staffId} and operator = #{operator}
+  </select>
 </mapper>

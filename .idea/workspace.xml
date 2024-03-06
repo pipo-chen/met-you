@@ -10,23 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db12167e-df53-424c-a021-a8c453451319" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/staff.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/RecordCommissionManagerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/IRecordCommissionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/RecordCommissionServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/common/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/common/Const.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/SOrderManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/SOrderManagerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/dao/SorderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/dao/SorderMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/dao/StaffMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/dao/StaffMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/Scommodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/Scommodity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/ISOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/ISOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/dao/CommissionRecordMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/dao/CommissionRecordMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/SOrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/SOrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/vo/SuperviseOrderVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/vo/SuperviseOrderVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/ScommodityMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/ScommodityMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/SorderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/SorderMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/StaffMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/StaffMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/member.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/CommissionRecordMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/CommissionRecordMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/staff.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/staff.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,9 +31,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Jsp File" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -320,6 +312,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/metyou/service/impl/CardServiceImpl.java</url>
           <line>69</line>
           <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/metyou/service/impl/RecordCommissionServiceImpl.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/metyou/service/impl/RecordCommissionServiceImpl.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="62" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

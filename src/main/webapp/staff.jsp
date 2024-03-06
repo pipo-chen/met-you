@@ -51,8 +51,14 @@
                     alert(data.msg)
                     document.getElementById('content').innerHTML = ""
                 } else {
-                    //对于获得的数据进行渲染
-                    read_render(data.data);
+                    $.get("/manage/commission_record/total_payed", {
+                    }, function (total) {
+                        //对于获得的数据进行渲染
+                        var str = "已结算佣金："+total.data
+                        console.log(total.data)
+                        read_render(data.data, str);
+                    });
+
                 }
             });
         }
@@ -65,8 +71,13 @@
                     alert(data.msg)
                     document.getElementById('content').innerHTML = ""
                 } else {
-                    //对于获得的数据进行渲染
-                    read_render(data.data);
+                    $.get("/manage/commission_record/total_unpayed", {
+                    }, function (total) {
+                        //对于获得的数据进行渲染
+                        var str = "未结算佣金："+ total.data
+                        console.log(total.data)
+                        read_render(data.data, str);
+                    });
                 }
             });
         }
@@ -93,8 +104,8 @@
             });
         }
 
-        function read_render(data) {
-            let html_str = ''
+        function read_render(data, str) {
+            let html_str = "<p style='color: white'>单据总数: "+data.length+"   "+str+"</p>"
             for (const item of data) {
                 let imgPath = "http://img.metyouedu.com/"+item['staffImg']
                 st_str = date_change(item['beginTime'])
@@ -115,32 +126,85 @@
             document.getElementById('content').innerHTML = html_str
         }
         function render(data) {
-            let html_str = ''
+            let html = "<p style='color: white'>单据总数: "+data.length+"</p>"
             for (const item of data) {
                 let imgPath = "http://img.metyouedu.com/"+item['staffImg']
                 st_str = date_change(item['beginTime'])
                 ed_str = date_change(item['endTime'])
                 let time = item['createTime']
-                // order_no = time.getFullYear() +"-"+time.getMonth() + "-"+time.getDay() + "-"+item['id']
-                html_str += "<div class='card'>\n" +
+                var sel_str = ""
+                switch (item['status']) {
+                    case 1:
+                        sel_str = "      <option value='1' selected = 'selected'>未开始</option>\n" +
+                            "      <option value='2'>进行中</option>\n" +
+                            "      <option value='3'>已结束</option>\n" +
+                            "      <option value='4'>已结算</option>"
+                        break;
+                    case 2:
+                        sel_str = "      <option value='1'>未开始</option>\n" +
+                            "      <option value='2' selected = 'selected'>进行中</option>\n" +
+                            "      <option value='3'>已结束</option>\n" +
+                            "      <option value='4'>已结算</option>"
+                        break
+                    case 3:
+                        sel_str = "      <option value='1'>未开始</option>\n" +
+                            "      <option value='2'>进行中</option>\n" +
+                            "      <option value='3' selected = 'selected'>已结束</option>\n" +
+                            "      <option value='4'>已结算</option>"
+                        break
+                    case 4:
+                        sel_str = "      <option value='1'>未开始</option>\n" +
+                            "      <option value='2'>进行中</option>\n" +
+                            "      <option value='3'>已结束</option>\n" +
+                            "      <option value='4' selected = 'selected'>已结算</option>"
+                        break
+                }
+                html += "<div class='card'>\n" +
                     //如果单据状态是已结算保存的话，则不能再显示下面的select？
                     "    <img src="+imgPath+">\n" +
                     "    <span>订单号："+item['id']+"</span>\n" +
-                    "    <select class = 'status-sel'>\n" +
-                    "      <option value='1'>未开始</option>\n" +
-                    "      <option value='2'>进行中</option>\n" +
-                    "      <option value='3'>已结束</option>\n" +
-                    "      <option value='4'>已结算</option>\n" +
-                    "    </select>\n" +
-                    "\n" +
+                    "    <select class ='status-sel'>"+sel_str+"</select>\n" +
                     "    <p>商品名称："+item['commodityName']+"(数量："+item['commodityNum']+")</p>\n" +
                     "    <p>监督员："+item['supervisName']+"</p>\n" +
                     "    <p>学员："+item['username']+"("+item['wechat']+")</p>\n" +
                     "    <p>本单提成：¥"+item['commission']+"</p>\n" +
                     "    <p>开始时间：<input class='starts' type='date' id='start' value="+st_str+">结束时间：<input class='ends' type='date' id='end' value="+ed_str+"></p>\n" +
+                    "    <input class='save_btn' id='savebtn' type='button' value='保存'>"+
                     "  </div>"
             }
-            document.getElementById('content').innerHTML = html_str
+            document.getElementById('content').innerHTML = html
+            var btns = document.getElementsByClassName("save_btn")
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].index = i;
+                btns[i].onclick = function () {
+                    var select = document.getElementsByClassName('status-sel')
+                    var starts_time = document.getElementsByClassName('starts')
+                    var ends_time = document.getElementsByClassName('ends')
+                    var sel = select[this.index]
+                    var index=sel.selectedIndex
+                    var order_id = data[this.index]['id']
+                    var status = sel.options[index].value
+
+                    var start_date = starts_time[this.index].value
+                    var end_date = ends_time[this.index].value
+                    var beginTime = start_date.replaceAll('-','/')
+                    var endTime = end_date.replaceAll('-','/')
+                    //保存接口
+                    $.get("/manage/sorder/change_status", {
+                        status : status,
+                        order_id : order_id,
+                        beginTime : beginTime,
+                        endTime : endTime
+                    }, function (data) {
+                        // 开始进行数据渲染
+                        if (data.status !== 0) {
+                            alert(data.msg)
+                        } else {
+                            alert("信息更改成功")
+                        }
+                    });
+                }
+            }
         }
     </script>
 </head>
@@ -169,6 +233,12 @@
 </body>
 </html>
 <style>
+    #savebtn {
+        background-color: cornflowerblue;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 5px;
+    }
     .form-group input {
         height: 30px;
         border-radius: 30px;
@@ -228,14 +298,8 @@
     input{
         padding-top: 5px;
         padding-bottom: 5px;
-        padding-left: 20px;
-        padding-right: 20px;
     }
-    #save {
-        background-color: cornflowerblue;
-        float: right;
 
-    }
     body {
         font-family: Arial, sans-serif;
         background-color: black;

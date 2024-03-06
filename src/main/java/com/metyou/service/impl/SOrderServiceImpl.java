@@ -66,7 +66,7 @@ public class SOrderServiceImpl implements ISOrderService {
             superviseOrderVO.setCommodityNum(order.getCommodityNum());
             //获取监督员姓名
             superviseOrderVO.setStaffName(staff.getUsername());
-            superviseOrderVO.setSupervisName(staff.getUsername());
+            superviseOrderVO.setSupervisName(order.getSupervisName());
             superviseOrderVO.setUserId(order.getUserId());
 
             superviseOrderVO.setCommodityId(order.getCommodityId());
@@ -118,7 +118,7 @@ public class SOrderServiceImpl implements ISOrderService {
 
             //获取监督员姓名
             superviseOrderVO.setStaffName(staff.getUsername());
-            superviseOrderVO.setSupervisName(staff.getUsername());
+            superviseOrderVO.setSupervisName(order.getSupervisName());
 
             //设置商品信息
             superviseOrderVO.setCommodityId(order.getCommodityId());
@@ -204,25 +204,36 @@ public class SOrderServiceImpl implements ISOrderService {
             if (status == Const.OrderStatus.ORDER_STATUS_FINISHED) {
                 int row = commissionRecordMapper.selectByOrderIdAndOperator(id, "add");
                 //说明该订单从未被计入佣金
+                //如果这个订单从未被添加入数据库中 那么就开始一单多人/一单一人的处理计算
                 if (row == 0) {
-                    //根据sorder获取的员工id 准确-不准确，员工id 应该
                     //增加佣金,佣金额度
                     Sorder sorder = sorderMapper.selectByPrimaryKey(id);
-                    record.setCommission(sorder.getCommission());
-                    record.setStaffId(sorder.getSupervisId());
-                    record.setStaffName(sorder.getSupervisName());
-                    record.setOperator("add");
-                    rowCount = commissionRecordMapper.insertSelective(record);
-                    if (rowCount <= 0) {
-                        return ServerResponse.createByErrorMessage("佣金增加失败!");
-                    }
-                    //获取员工当前的balance 加上commission 进行更新
-                    Staff staff = staffMapper.selectByPrimaryKey(sorder.getSupervisId());
-                    BigDecimal balance = staff.getBalance().add(sorder.getCommission());
-                    staff.setBalance(balance);
-                    rowCount = staffMapper.updateBalance(record.getStaffId(), balance);
-                    if (rowCount <= 0) {
-                        return ServerResponse.createByErrorMessage("佣金增加失败!");
+                    //判断有几位监督员
+                    String[] superviss = sorder.getSupervisName().split("\\+");
+
+                    for (String per_supervis : superviss) {
+                        CommissionRecord res = new CommissionRecord();
+                        res.setOrderId(record.getOrderId());
+                        res.setCreator(record.getCreator());
+                        res.setCreatorId(record.getCreatorId());
+                        res.setCommission(sorder.getCommission());
+                        //根据员工名，查询员工ID
+                        Integer per_supervis_id = staffMapper.selectByUsername(per_supervis);
+                        res.setStaffId(per_supervis_id);
+                        res.setStaffName(sorder.getSupervisName());
+                        res.setOperator("add");
+                        rowCount = commissionRecordMapper.insertSelective(res);
+                        if (rowCount <= 0) {
+                            return ServerResponse.createByErrorMessage("佣金增加失败!");
+                        }
+                        //获取员工当前的balance 加上commission 进行更新
+                        Staff staff = staffMapper.selectByPrimaryKey(per_supervis_id);
+                        BigDecimal balance = staff.getBalance().add(sorder.getCommission());
+                        staff.setBalance(balance);
+                        rowCount = staffMapper.updateBalance(per_supervis_id, balance);
+                        if (rowCount <= 0) {
+                            return ServerResponse.createByErrorMessage("佣金增加失败!");
+                        }
                     }
                 }
             }
@@ -239,18 +250,20 @@ public class SOrderServiceImpl implements ISOrderService {
                     //减少结算佣金，佣金额度变化
                     Sorder sorder = sorderMapper.selectByPrimaryKey(id);
                     record.setCommission(sorder.getCommission());
-                    record.setStaffId(sorder.getSupervisId());
-                    record.setStaffName(sorder.getSupervisName());
+                    //todo 结算的话结算当前监督员的单子，不要结算订单中列的id
+                    Integer staffId = staffMapper.selectByUsername(record.getCreator());
+                    record.setStaffId(staffId);
+                    record.setStaffName(record.getCreator());
                     record.setOperator("sub");
                     rowCount = commissionRecordMapper.insertSelective(record);
                     if (rowCount <= 0) {
                         return ServerResponse.createByErrorMessage("佣金减少失败!");
                     }
                     //获取员工当前的balance 减去本单 commission 进行更新
-                    Staff staff = staffMapper.selectByPrimaryKey(sorder.getSupervisId());
+                    Staff staff = staffMapper.selectByPrimaryKey(staffId);
                     BigDecimal balance = staff.getBalance().subtract(sorder.getCommission());
                     staff.setBalance(balance);
-                    rowCount = staffMapper.updateBalance(record.getStaffId(), balance);
+                    rowCount = staffMapper.updateBalance(staffId, balance);
                     if (rowCount <= 0) {
                         return ServerResponse.createByErrorMessage("佣金减少失败!");
                     }

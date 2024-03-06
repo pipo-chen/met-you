@@ -28,7 +28,6 @@ public class Const {
         int ROLE_CUSTOMER = 0; // 学员
         int ROLE_ADMIN = 1; //管理员
     }
-
     public interface OrderStatus {
         int ORDER_STATUS_NEED_BEGIN = 1;
         int ORDER_STATUS_ACTIVE = 2;
