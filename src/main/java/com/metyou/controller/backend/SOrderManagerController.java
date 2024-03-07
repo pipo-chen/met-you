@@ -102,4 +102,50 @@ public class SOrderManagerController {
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }
     }
+
+    /**
+     * 仅超级管理员可以事后订正佣金（改整单佣金）
+     * @param session
+     * @param order_id
+     * @param commission
+     * @return
+     */
+    @RequestMapping("correct_commission")
+    @ResponseBody
+    public ServerResponse<String> correctCommission(HttpSession session, Integer order_id, BigDecimal commission) {
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登录");
+        }
+        //只有超级管理员可以
+        if (user.getId() == 1) {
+            return isOrderService.correctCommission(order_id, commission);
+        } else {
+            return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
+        }
+    }
+
+    /**
+     * 仅超级管理员，改单个佣金
+     * @param session
+     * @Param staffName 员工姓名
+     * @param commission
+     * @return
+     */
+    @RequestMapping("correct_per_commission")
+    @ResponseBody
+    public ServerResponse<String> correctPerCommission(HttpSession session,String staffName, Integer orderId, BigDecimal commission) {
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登录");
+        }
+        //只有超级管理员可以
+        if (user.getId() == 1) {
+            return isOrderService.correctPerCommission(staffName, orderId, commission);
+        } else {
+            return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
+        }
+    }
+
+
 }

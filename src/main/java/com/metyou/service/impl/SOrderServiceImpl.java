@@ -102,7 +102,7 @@ public class SOrderServiceImpl implements ISOrderService {
         if (status == Const.OrderStatus.ORDER_STATUS_PAYED) {
             for (Integer payedId : payedIds) {
                 Sorder order = sorderMapper.selectByPrimaryKey(payedId);
-                SuperviseOrderVO superviseOrderVO = sorderGenerateSuperviseOrderVO(order);
+                SuperviseOrderVO superviseOrderVO = sorderGenerateSuperviseOrderVO(order, staffId);
                 data.add(superviseOrderVO);
             }
         } else {
@@ -111,11 +111,11 @@ public class SOrderServiceImpl implements ISOrderService {
                 //如果改订单已经结算过了，就不要出现再这里了
                 if (payedIds.contains(order.getId()))
                     continue;
-                SuperviseOrderVO superviseOrderVO = sorderGenerateSuperviseOrderVO(order);
+                SuperviseOrderVO superviseOrderVO = sorderGenerateSuperviseOrderVO(order, staffId);
                 data.add(superviseOrderVO);
             }
         }
-        if (sorders.isEmpty()) {
+        if (data.isEmpty()) {
             return ServerResponse.createByErrorMessage("没有查到相关服务记录");
         }
         return ServerResponse.createBySuccess(data);
@@ -127,15 +127,31 @@ public class SOrderServiceImpl implements ISOrderService {
      * @param order
      * @return
      */
-    public SuperviseOrderVO sorderGenerateSuperviseOrderVO(Sorder order) {
+    public SuperviseOrderVO sorderGenerateSuperviseOrderVO(Sorder order, Integer staffId) {
+        /**
+         * 多人情况下，如果是进行中的订单 commission 仅供参考
+         * 如果当前订单已经关闭或者结算
+         * 监督员的commission 展示 还是从 commission_record中根据 staff_id 和 order_id 去查
+         */
         SuperviseOrderVO superviseOrderVO = new SuperviseOrderVO();
-        Staff staff = staffMapper.selectByPrimaryKey(order.getSupervisId());
+        Staff staff = staffMapper.selectByPrimaryKey(staffId);
         Scommodity scommodity =  scommodityMapper.selectByPrimaryKey(order.getCommodityId());
 
-        //设置用户信息
+        //设置学员信息
         superviseOrderVO.setUserId(order.getUserId());
         superviseOrderVO.setUsername(order.getUsername());
         superviseOrderVO.setWechat(order.getWechat());
+
+        if (order.getStatus() >= Const.OrderStatus.ORDER_STATUS_FINISHED) {
+            //特殊情况下 commission 从 commission_record中取，因为那里存放着订正的数据
+            List<CommissionRecord> commissionRecordList = commissionRecordMapper.selectByOrderIdAndStaffId(order.getId(), staffId);
+            if (commissionRecordList.size() > 0) {
+                BigDecimal commission = commissionRecordList.get(0).getCommission();
+                superviseOrderVO.setCommission(commission);
+            }
+        } else {
+            superviseOrderVO.setCommission(order.getCommission());
+        }
 
         //销售价格
         superviseOrderVO.setSalePrice(order.getSalePrice());
@@ -148,7 +164,6 @@ public class SOrderServiceImpl implements ISOrderService {
         superviseOrderVO.setSupervisId(order.getSupervisId());
         superviseOrderVO.setStaffImg(staff.getMainImage());
         superviseOrderVO.setCommodityNum(order.getCommodityNum());
-        superviseOrderVO.setCommission(order.getCommission());
         superviseOrderVO.setCreateTime(order.getCreateTime());
 
         //获取监督员姓名
@@ -306,7 +321,14 @@ public class SOrderServiceImpl implements ISOrderService {
     public ServerResponse<String> addPayedRecord(Integer orderId, CommissionRecord record, Integer staffId) {
         //减少结算佣金，佣金额度变化
         Sorder sorder = sorderMapper.selectByPrimaryKey(orderId);
-        record.setCommission(sorder.getCommission());
+        //todo getcommission方式不对如果是结算的话，从add中进行扣出 找到对应的add记录获取对应的commission
+        List<CommissionRecord> recordList = commissionRecordMapper.selectByOrderIdAndStaffId(orderId, staffId);
+        if (recordList.size() == 0) {
+            return ServerResponse.createByErrorMessage("该订单还没有结束");
+        } else {
+            BigDecimal commission = recordList.get(0).getCommission();
+            record.setCommission(sorder.getCommission());
+        }
         record.setStaffId(staffId);
         record.setStaffName(record.getCreator());
         record.setOperator("sub");
@@ -325,4 +347,93 @@ public class SOrderServiceImpl implements ISOrderService {
         return ServerResponse.createBySuccessMessage("操作成功！");
     }
 
+    /**
+     * 仅超级管理员可以使用的佣金订正(sorder中的佣金字段，查询涉及到的 commission_record -> staffId 如果该行是sub 则balance- 是add则用户balance+)
+     * @param orderId
+     * @param commission
+     * @return
+     */
+    @Override
+    public ServerResponse<String> correctCommission(Integer orderId, BigDecimal commission) {
+        int rowCount = sorderMapper.updateCommission(orderId, commission);
+        if (rowCount > 0) {
+            //操作成功开始根据order_id 找到commission_record
+            List<CommissionRecord> commissionRecordList = commissionRecordMapper.selectByOrderId(orderId);
+            for (CommissionRecord record : commissionRecordList) {
+                //根据每条record 更新commission - 同时根据staffId 和 operator 更新balance
+                Integer staffId = record.getStaffId();
+                Staff staff = staffMapper.selectByPrimaryKey(staffId);
+                BigDecimal balance = staff.getBalance();
+                BigDecimal oldCommission = record.getCommission();
+                //先复原balance
+                if (record.getOperator().equals("sub")) {
+                    balance = balance.add(oldCommission);
+                    BigDecimal newBalance = balance.subtract(commission);
+                    if (!updateCommission(staffId, record.getId(), newBalance, commission)) {
+                        return ServerResponse.createByErrorMessage("佣金更新失败");
+                    }
+                }
+                else if (record.getOperator().equals("add")) {
+                    balance = balance.subtract(oldCommission);
+                    BigDecimal newBalance  = balance.add(commission);
+                    if (!updateCommission(staffId, record.getId(), newBalance, commission)) {
+                        return ServerResponse.createByErrorMessage("佣金更新失败");
+                    }
+                }
+            }
+        }
+        return ServerResponse.createBySuccess("更新成功！");
+    }
+
+    private Boolean updateCommission(Integer staffId, Integer recordId, BigDecimal newBalance, BigDecimal commission) {
+        int row = staffMapper.updateBalance(staffId, newBalance);
+        if (row <= 0) {
+            return false;
+        }
+        //根据 ID 去更新 commission_record
+        row = commissionRecordMapper.updateCommission(recordId, commission);
+        if (row <= 0) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 仅供超级管理员使用的佣金更新（这种更新不会同步更新 sorder 中的 commission， 多人监督 会出现一个标价佣金，和实际佣金的出入）
+     * @param commissionRecord中的id
+     * @param commission 变更后的佣金
+     * @return
+     */
+    @Override
+    public ServerResponse<String> correctPerCommission(String staffName, Integer orderId, BigDecimal commission) {
+        Integer staffId = staffMapper.selectByUsername(staffName);
+
+        if (staffId == null) {
+            return ServerResponse.createByErrorMessage("该员工不存在");
+        }
+        //根据每条record 更新commission - 同时根据staffId 和 operator 更新balance
+        //根据staffId 和 orderId 查询对应的record
+        List<CommissionRecord> recordList = commissionRecordMapper.selectByOrderIdAndStaffId(orderId, staffId);
+        //把它内部所有的记录，都做订正
+        for (CommissionRecord record : recordList) {
+            Staff staff = staffMapper.selectByPrimaryKey(staffId);
+            BigDecimal balance = staff.getBalance();
+            BigDecimal oldCommission = record.getCommission();
+            //先复原balance
+            if (record.getOperator().equals("sub")) {
+                balance = balance.add(oldCommission);
+                BigDecimal newBalance = balance.subtract(commission);
+                if (!updateCommission(staffId, record.getId(), newBalance, commission)) {
+                    return ServerResponse.createByErrorMessage("佣金更新失败");
+                }
+            } else if (record.getOperator().equals("add")) {
+                balance = balance.subtract(oldCommission);
+                BigDecimal newBalance = balance.subtract(oldCommission);
+                if (!updateCommission(staffId, record.getId(), newBalance, commission)) {
+                    return ServerResponse.createByErrorMessage("佣金更新失败");
+                }
+            }
+        }
+        return ServerResponse.createBySuccess("更新成功！");
+    }
 }

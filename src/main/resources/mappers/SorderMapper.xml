@@ -203,4 +203,14 @@
         from sorder
         where id = #{id}
   </select>
+
+  <update id="updateCommission" parameterType="map">
+    update sorder
+    <set>
+      <if test="commission != null">
+        commission = #{commission}
+      </if>
+    </set>
+    where id = #{id}
+  </update>
 </mapper>

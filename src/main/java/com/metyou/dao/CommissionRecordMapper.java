@@ -18,4 +18,12 @@ public interface CommissionRecordMapper {
     List<Integer> selectPayedOrderId(@Param("staffId") Integer staffId, @Param("operator")String operator);
 
     int selectItemPayed(@Param("orderId") Integer orderId, @Param("staffId") Integer staffId, @Param("operator") String operator);
+
+    List<CommissionRecord>selectByOrderId(@Param("orderId") Integer orderId);
+
+    int updateCommission(@Param("id") Integer id, @Param("commission") BigDecimal commission);
+
+    CommissionRecord selectRecord(@Param("id")Integer id);
+
+    List<CommissionRecord>selectByOrderIdAndStaffId(@Param("orderId") Integer orderId, @Param("staffId") Integer staffId);
 }

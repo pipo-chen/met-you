@@ -50,6 +50,8 @@ public class RecordCommissionServiceImpl implements IRecordCommissionService {
             return ServerResponse.createBySuccess("0");
         }
         BigDecimal sub = commissionRecordMapper.payedCalculate(staffId, "sub");
+        if(sub == null)
+            sub = new BigDecimal(0);
         res = res.subtract(sub);
         return ServerResponse.createBySuccess(res.toString());
 

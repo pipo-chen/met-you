@@ -6,6 +6,7 @@ import com.metyou.pojo.CommissionRecord;
 import com.metyou.pojo.Sorder;
 import com.metyou.vo.SuperviseOrderVO;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -17,4 +18,9 @@ public interface ISOrderService {
     ServerResponse<List<SuperviseOrderVO>> search(String supervisName, Integer status);
 
     ServerResponse<String>changeStatus(Integer id, Integer status, Date beginTime, Date endTime, CommissionRecord record);
+
+    ServerResponse<String>correctCommission(Integer orderId, BigDecimal commission);
+
+    public ServerResponse<String> correctPerCommission(String staffName, Integer orderId, BigDecimal commission);
+
 }

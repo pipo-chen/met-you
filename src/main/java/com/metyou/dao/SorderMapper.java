@@ -3,6 +3,7 @@ package com.metyou.dao;
 import com.metyou.pojo.Sorder;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface SorderMapper {
     int updateStatus(@Param("id") Integer id, @Param("status") Integer status, @Param("beginTime")Date beginTime, @Param("endTime")Date endTime);
 
     Sorder selectByPrimaryKey(@Param("id") Integer id);
+
+    int updateCommission(@Param("id") Integer id, @Param("commission") BigDecimal commission);
 }

@@ -15,6 +15,18 @@
       <arg column="note" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
+  <sql id="Base_Column_List">
+    id,
+    staff_id,
+    staff_name,
+    order_id,
+    operator,
+    creator,
+    creator_id,
+    commission,
+    create_time,
+    note
+  </sql>
   <insert id="insert" parameterType="com.metyou.pojo.CommissionRecord">
     insert into commission_record (id, staff_id, staff_name, 
       order_id, operator, creator, 
@@ -100,5 +112,25 @@
   </select>
   <select id="selectItemPayed" parameterType="map" resultType="int">
     select count(*) from commission_record where order_id = #{orderId} and staff_id = #{staffId} and operator = #{operator}
+  </select>
+
+  <select id="selectByOrderId" parameterType="int" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+        from commission_record
+        where order_id = #{orderId}
+  </select>
+  <update id="updateCommission" parameterType="map">
+    update commission_record set commission = #{commission} where id = #{id}
+  </update>
+  <select id="selectRecord" parameterType="int" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+        from commission_record
+        where id = #{id}
+  </select>
+
+  <select id="selectByOrderIdAndStaffId" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+        from commission_record
+        where order_id = #{orderId} and staff_id = #{staffId}
   </select>
 </mapper>
