@@ -400,7 +400,7 @@ public class SOrderServiceImpl implements ISOrderService {
 
     /**
      * 仅供超级管理员使用的佣金更新（这种更新不会同步更新 sorder 中的 commission， 多人监督 会出现一个标价佣金，和实际佣金的出入）
-     * @param commissionRecord中的id
+     * @param
      * @param commission 变更后的佣金
      * @return
      */

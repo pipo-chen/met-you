@@ -118,6 +118,7 @@
               "        <span>订单号："+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+'-'+item['id']+"</span>\n" +
               "        <span class=\"date\">"+status+"</span>\n" +
               "        <p>商品名称："+item['commodityName']+"("+item['originPrice']+")</p>\n" +
+              "        <p>购买数量："+item['commodityNum']+"</p>\n" +
               "        <p>监督员："+item['supervisName']+"</p>\n" +
               "        <div>\n" +
               "          <p>支付方式："+payway+"  实付金额：¥"+item['salePrice']+"元</p>\n" +
