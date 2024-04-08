@@ -25,6 +25,8 @@ public interface IUserService {
     //backend
     ServerResponse checkAdminRole(User user);
 
+    ServerResponse checkSuperAdminRole(User user);
+
     ServerResponse<User> getUserInfoById(Integer userId);
 
     ServerResponse<PageInfo> getMemberList(int pageNum, int pageSize, String wechat);

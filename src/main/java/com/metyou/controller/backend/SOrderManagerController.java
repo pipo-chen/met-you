@@ -118,7 +118,7 @@ public class SOrderManagerController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登录");
         }
         //只有超级管理员可以
-        if (user.getId() == 1) {
+        if (iUserService.checkSuperAdminRole(user).isSuccess()) {
             return isOrderService.correctCommission(order_id, commission);
         } else {
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
@@ -140,12 +140,11 @@ public class SOrderManagerController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登录");
         }
         //只有超级管理员可以
-        if (user.getId() == 1) {
+        if (iUserService.checkSuperAdminRole(user).isSuccess()) {
             return isOrderService.correctPerCommission(staffName, orderId, commission);
         } else {
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }
     }
-
 
 }

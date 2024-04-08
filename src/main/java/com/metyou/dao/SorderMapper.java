@@ -21,4 +21,7 @@ public interface SorderMapper {
     Sorder selectByPrimaryKey(@Param("id") Integer id);
 
     int updateCommission(@Param("id") Integer id, @Param("commission") BigDecimal commission);
+
+    //一次性
+    List<Sorder> getAllSorder();
 }

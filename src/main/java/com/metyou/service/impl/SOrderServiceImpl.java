@@ -214,7 +214,7 @@ public class SOrderServiceImpl implements ISOrderService {
             }
             Card card = cardMapper.selectByPrimaryKey(sorder.getCardId());
             //现有的余额都从卡里面取出
-            if (card.getBalance().floatValue() < 1 || card.getBalance().floatValue() - sorder.getSalePrice().floatValue() < 1)
+            if (card.getBalance().floatValue() < 0 || card.getBalance().floatValue() - sorder.getSalePrice().floatValue() < 0)
                 return ServerResponse.createByErrorMessage("余额不足!");
             else {
                 BigDecimal balance = card.getBalance().subtract(sorder.getSalePrice());

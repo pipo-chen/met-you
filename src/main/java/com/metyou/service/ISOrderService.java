@@ -11,16 +11,16 @@ import java.util.Date;
 import java.util.List;
 
 public interface ISOrderService {
-    ServerResponse<List<SuperviseOrderVO>> searchOrderRecord(Integer userId, Integer cardId, Integer payway);
+    ServerResponse<List<SuperviseOrderVO>>searchOrderRecord(Integer userId, Integer cardId, Integer payway);
 
-    ServerResponse<String> consume(Sorder sorder, CardRecord record, boolean isOld);
+    ServerResponse<String>consume(Sorder sorder, CardRecord record, boolean isOld);
 
-    ServerResponse<List<SuperviseOrderVO>> search(String supervisName, Integer status);
+    ServerResponse<List<SuperviseOrderVO>>search(String supervisName, Integer status);
 
     ServerResponse<String>changeStatus(Integer id, Integer status, Date beginTime, Date endTime, CommissionRecord record);
 
     ServerResponse<String>correctCommission(Integer orderId, BigDecimal commission);
 
-    public ServerResponse<String> correctPerCommission(String staffName, Integer orderId, BigDecimal commission);
+    ServerResponse<String>correctPerCommission(String staffName, Integer orderId, BigDecimal commission);
 
 }

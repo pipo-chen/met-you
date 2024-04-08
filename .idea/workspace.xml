@@ -10,9 +10,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db12167e-df53-424c-a021-a8c453451319" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/SuperviseOrderManagerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/StaffOrderRecord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/pojo/StaffOrderRecordExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/ISuperviceOrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/SuperviseOrderServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/metyou/vo/OrderAndStaffStatusVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/common/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/common/Const.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/common/ResponseCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/common/ResponseCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/CardManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/CardManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/SOrderManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/controller/backend/SOrderManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/dao/SorderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/dao/SorderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/ISOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/ISOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/IUserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/SOrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/SOrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/metyou/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/SorderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/SorderMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +86,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mk/Documents/metyou-platform/metyou-backend/src/main/resources/mappers&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/mk/Documents/metyou-platform/metyou-backend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -80,7 +95,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -274,6 +289,14 @@
       <workItem from="1709273784228" duration="14341000" />
       <workItem from="1709738007693" duration="18331000" />
       <workItem from="1709879119183" duration="598000" />
+      <workItem from="1711355071110" duration="7182000" />
+      <workItem from="1711462967090" duration="1286000" />
+      <workItem from="1711507733782" duration="709000" />
+      <workItem from="1711522959514" duration="1498000" />
+      <workItem from="1711699137890" duration="612000" />
+      <workItem from="1712021938501" duration="727000" />
+      <workItem from="1712464822503" duration="628000" />
+      <workItem from="1712476129398" duration="3021000" />
     </task>
     <servers />
   </component>
@@ -313,6 +336,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/metyou/service/impl/RecordCommissionServiceImpl.java</url>
           <line>31</line>
           <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/metyou/service/impl/SOrderServiceImpl.java</url>
+          <line>182</line>
+          <option name="timeStamp" value="71" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

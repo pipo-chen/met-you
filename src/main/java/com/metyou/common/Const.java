@@ -24,9 +24,9 @@ public class Const {
     }
 
     public interface Role {
-        int ROLE_MEMBER = 2; //会员
         int ROLE_CUSTOMER = 0; // 学员
         int ROLE_ADMIN = 1; //管理员
+        int ROLE_SUPER_ADMIN = 2;
     }
     public interface OrderStatus {
         int ORDER_STATUS_NEED_BEGIN = 1;
